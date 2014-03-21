@@ -10,6 +10,7 @@ namespace console
 			while (true) 
 			{
 				//This greets the user when they run the program
+				Console.Clear();
 				Console.WriteLine ("Welcome to Character Generator\nSelect what you would like to do next\n\n" +
 				"1) Abilities\n" +
 				"2) Race\n" +
@@ -35,30 +36,34 @@ namespace console
 		//Select which character generation screen to go to
 		public void Selection()
 		{
-			select_start:
-			switch (Console.ReadLine()) 
+			bool select = true;
+			while (select == true) 
 			{
-			case "1":
-				Abilities ();
-				break;
-			case "2":
-				Race ();
-				break;
-			case "3":
-				Class ();
-				break;
-			case "4":
-				Skills ();
-				break;
-			case "5":
-				Feats ();
-				break;
-			case "6":
-				Description ();
-				break;
-			default:
-				Console.WriteLine ("Try an integer between 1 and 6 (inclusive, smartass).");
-				goto select_start; //Oh man I used a goto
+				select = false;
+				switch (Console.ReadLine ()) {
+				case "1":
+					Abilities ();
+					break;
+				case "2":
+					Race ();
+					break;
+				case "3":
+					Class ();
+					break;
+				case "4":
+					Skills ();
+					break;
+				case "5":
+					Feats ();
+					break;
+				case "6":
+					Description ();
+					break;
+				default:
+					Console.WriteLine ("Try an integer between 1 and 6 (inclusive, smartass).");
+					select = true;
+					break;
+				}
 			}
 		}
 
