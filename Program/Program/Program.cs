@@ -13,14 +13,10 @@ namespace console
 		{
 			string[] generator = {"Abilities", "Race", "Class", "Skills", "Feats", "Description"};
 
-			bool idiot = true;
-			while (idiot) {
-				try {
-					select = Convert.ToInt16 (Console.ReadLine ());
-					idiot = false;
-				} catch (FormatException) {
-					Console.WriteLine ("Try a number from 1 to 6");
-				}
+			while (select < 1 || select > 6) 
+			{
+				select = Convert.ToInt16 (Console.ReadLine ());
+				Console.WriteLine ("bad selection");
 			}
 
 			select--;
@@ -39,7 +35,6 @@ namespace console
 				Feats ();
 			else if (gen == "Description")
 				Description ();
-
 		}
 
 		public void Abilities()
