@@ -6,20 +6,30 @@ namespace console
 	{
 		//member variables
 		private int select;
-		enum Generator
-		{
-			Abilities, Race, Class, Skills, Feats, Description
-		}
+		public string gen;
+
 		public void Selection()
 		{
 			string[] generator = {"Abilities", "Race", "Class", "Skills", "Feats", "Description"};
 			select = Convert.ToInt16 (Console.ReadLine ());
-			Console.WriteLine ("Selected {0}", generator[select]);
+			select--;
+			gen = generator[select];
+			Console.WriteLine ("Selected {0}", gen);
+
+			if (gen == "Abilities")
+				Abilities ();
+		}
+
+		public void Abilities()
+		{
+			Console.Clear ();
+			Console.WriteLine ("Abilities");
+			Console.ReadLine ();
 		}
 	}
+
 	class MainClass
 	{
-
 		public static void Main (string[] args)
 		{
 			Console.WriteLine ("Welcome to Character Generator " +
