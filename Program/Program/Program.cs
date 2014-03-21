@@ -18,12 +18,53 @@ namespace console
 
 			if (gen == "Abilities")
 				Abilities ();
+			else if (gen == "Race")
+				Race ();
+			else if (gen == "Class")
+				Class ();
+			else if (gen == "Skills")
+				Skills ();
+			else if (gen == "Feats")
+				Feats ();
+			else if (gen == "Description")
+				Description ();
+
 		}
 
 		public void Abilities()
 		{
 			Console.Clear ();
 			Console.WriteLine ("Abilities");
+			Console.ReadLine ();
+		}
+		public void Race()
+		{
+			Console.Clear ();
+			Console.WriteLine ("Race");
+			Console.ReadLine ();
+		}
+		public void Class()
+		{
+			Console.Clear ();
+			Console.WriteLine ("Class");
+			Console.ReadLine ();
+		}
+		public void Skills()
+		{
+			Console.Clear ();
+			Console.WriteLine ("Skills");
+			Console.ReadLine ();
+		}
+		public void Feats()
+		{
+			Console.Clear ();
+			Console.WriteLine ("Feats");
+			Console.ReadLine ();
+		}
+		public void Description()
+		{
+			Console.Clear ();
+			Console.WriteLine ("Description");
 			Console.ReadLine ();
 		}
 	}
