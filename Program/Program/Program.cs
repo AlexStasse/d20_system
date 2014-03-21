@@ -41,9 +41,16 @@ namespace console
 			//Using numbers instead of character highlights to select a menu makes this loop much simpler, but it's less pretty.
 			while (select < 1 || select > 6) 
 			{
-				select = Convert.ToInt16 (Console.ReadLine ());
+				try
+				{
+					select = Convert.ToInt16 (Console.ReadLine ());
+				}
+				catch (FormatException)
+				{
+					select = 0;
+				}
 				/*The next step after here in all instances will immediately clear the console, 
-				 * so we can display this and it will only be seen if the user fucked up somehow*/
+				* so we can display this and it will only be seen if the user fucked up somehow*/
 				Console.WriteLine ("bad selection");
 			}
 
