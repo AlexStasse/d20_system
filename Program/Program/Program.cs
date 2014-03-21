@@ -8,10 +8,21 @@ namespace console
 		private int select;
 		public string gen;
 
+		//Select which character generation screen to go to
 		public void Selection()
 		{
 			string[] generator = {"Abilities", "Race", "Class", "Skills", "Feats", "Description"};
-			select = Convert.ToInt16 (Console.ReadLine ());
+
+			bool idiot = true;
+			while (idiot) {
+				try {
+					select = Convert.ToInt16 (Console.ReadLine ());
+					idiot = false;
+				} catch (FormatException) {
+					Console.WriteLine ("Try a number from 1 to 6");
+				}
+			}
+
 			select--;
 			gen = generator[select];
 			Console.WriteLine ("Selected {0}", gen);
