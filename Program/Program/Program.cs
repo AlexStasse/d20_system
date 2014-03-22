@@ -11,14 +11,6 @@ namespace console
 			{
 				//This greets the user when they run the program
 				Console.Clear();
-				Console.WriteLine ("Welcome to Character Generator\nSelect what you would like to do next\n\n" +
-				"1) Abilities\n" +
-				"2) Race\n" +
-				"3) Class\n" +
-				"4) Skills\n" +
-				"5) Feats\n" +
-				"6) Description");
-
 				//After greeting immediately run a new character generator.  Can add Save/Load functionality later.
 				Menu m = new Menu ();
 				//This runs a method to select which part of the character generator the user would like to visit
@@ -36,6 +28,14 @@ namespace console
 		//Select which character generation screen to go to
 		public void Generation()
 		{
+			Console.Clear();
+			Console.WriteLine ("Welcome to Character Generator\nSelect what you would like to do next\n\n" +
+				"1) Abilities\n" +
+				"2) Race\n" +
+				"3) Class\n" +
+				"4) Skills\n" +
+				"5) Feats\n" +
+				"6) Description");
 			charGen c = new charGen ();
 			bool select = true;
 			while (select == true) 
