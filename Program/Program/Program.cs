@@ -20,44 +20,45 @@ namespace console
 				"6) Description");
 
 				//After greeting immediately run a new character generator.  Can add Save/Load functionality later.
-				charGen c = new charGen ();
+				Menu m = new Menu ();
 				//This runs a method to select which part of the character generator the user would like to visit
-				c.Selection ();
+				m.Generation ();
 				//Keeps the console open should the program reach this far, otherwise the console would immediately close.
 				Console.ReadLine ();
 			}
 		}
 	}
 
-	//This class actually contains all the character generation methods
-	class charGen
+	//This class contains menu methods
+	class Menu
 	{
 
 		//Select which character generation screen to go to
-		public void Selection()
+		public void Generation()
 		{
+			charGen c = new charGen ();
 			bool select = true;
 			while (select == true) 
 			{
 				select = false;
 				switch (Console.ReadLine ()) {
 				case "1":
-					Abilities ();
+					c.Abilities ();
 					break;
 				case "2":
-					Race ();
+					c.Race ();
 					break;
 				case "3":
-					Class ();
+					c.Class ();
 					break;
 				case "4":
-					Skills ();
+					c.Skills ();
 					break;
 				case "5":
-					Feats ();
+					c.Feats ();
 					break;
 				case "6":
-					Description ();
+					c.Description ();
 					break;
 				default:
 					Console.WriteLine ("Try an integer between 1 and 6 (inclusive, smartass).");
@@ -66,6 +67,11 @@ namespace console
 				}
 			}
 		}
+	}
+
+	//This class contains the character generators
+	class charGen
+	{
 
 		/*Bunch of methods used for each part of the character generator, all currently do nothing.  
 		 *Some of these may end up large so we can consider offloading them somewhere else maybe?*/
