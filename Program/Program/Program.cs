@@ -9,77 +9,121 @@ namespace console
 		{
 			while (true) 
 			{
-				//This greets the user when they run the program
+				//Clear the console if we come back to the program start and give user options.
 				Console.Clear();
-				//After greeting immediately run a new character generator.  Can add Save/Load functionality later.
-				Menu m = new Menu ();
-				//This runs a method to select which part of the character generator the user would like to visit
-				m.Generation ();
+				Console.WriteLine ("Welcome to the character manager\n" +
+					"(L)oad, (S)ave or (C)reate new character");
+
+				bool select = true;
+				while (select == true) 
+				{
+					select = false;
+					switch (Console.ReadLine().ToUpper())
+					{
+					case "L":
+						InOut L = new InOut ();
+						L.Load ();
+						break;
+					case "S":
+						InOut S = new InOut ();
+						S.Save ();
+						break;
+					case "C":
+						//Immediately run a new character editor.
+						Menu m = new Menu ();
+						//This runs a method to select which part of the character generator the user would like to visit
+						m.Editor ();
+						break;
+					default:
+						select = true;
+						break;
+					}
+				}
 				//Keeps the console open should the program reach this far, otherwise the console would immediately close.
 				Console.ReadLine ();
 			}
 		}
 	}
 
+	class InOut
+	{
+			public void Load()
+			{
+				Console.Clear ();
+				Console.WriteLine ("Load");
+				Console.ReadLine ();
+			}
+
+			public void Save()
+			{
+				Console.Clear ();
+				Console.WriteLine ("Save");
+				Console.ReadLine ();
+			}
+	}
+
 	//This class contains menu methods
 	class Menu
 	{
 
-		//Select which character generation screen to go to
-		public void Generation()
+		//Select which character edit screen to go to
+		public void Editor()
 		{
-			Console.Clear();
-			Console.WriteLine ("Welcome to Character Generator\nSelect what you would like to do next\n\n" +
-				"1) Abilities\n" +
-				"2) Race\n" +
-				"3) Class\n" +
-				"4) Skills\n" +
-				"5) Feats\n" +
-				"6) Description");
-			charGen c = new charGen ();
 			bool select = true;
 			while (select == true) 
 			{
-				select = false;
-				switch (Console.ReadLine ()) {
-				case "1":
+				charEdit c = new charEdit ();
+				Console.Clear();
+				Console.WriteLine ("Character Editor\nSelect what you would like to change\n\n" +
+					"(A)bilities\n" +
+					"(R)ace\n" +
+					"(C)lass\n" +
+					"(S)kills\n" +
+					"(F)eats\n" +
+					"(D)escription\n" +
+					"(B)ack to main menu");
+					
+				switch (Console.ReadLine().ToUpper()) 
+				{
+				case "A":
 					c.Abilities ();
 					break;
-				case "2":
+				case "R":
 					c.Race ();
 					break;
-				case "3":
+				case "C":
 					c.Class ();
 					break;
-				case "4":
+				case "S":
 					c.Skills ();
 					break;
-				case "5":
+				case "F":
 					c.Feats ();
 					break;
-				case "6":
+				case "D":
 					c.Description ();
 					break;
+				case "B":
+					select = false;
+					break;
 				default:
-					Console.WriteLine ("Try an integer between 1 and 6 (inclusive, smartass).");
-					select = true;
 					break;
 				}
 			}
 		}
 	}
 
-	//This class contains the character generators
-	class charGen
+	//This class contains the character editors
+	class charEdit
 	{
 
-		/*Bunch of methods used for each part of the character generator, all currently do nothing.  
+		/*Bunch of methods used for each part of the character editing, all currently do nothing.  
 		 *Some of these may end up large so we can consider offloading them somewhere else maybe?*/
 		public void Abilities()
 		{
 			Console.Clear ();
 			Console.WriteLine ("Abilities");
-			Console.ReadLine ();
+			//Console.ReadLine ();
 		}
 		public void Race()
 		{
@@ -109,6 +153,18 @@ namespace console
 		{
 			Console.Clear ();
 			Console.WriteLine ("Description");
+			Console.ReadLine ();
+		}
+		public void Load()
+		{
+			Console.Clear ();
+			Console.WriteLine ("Load");
+			Console.ReadLine ();
+		}
+		public void Save()
+		{
+			Console.Clear ();
+			Console.WriteLine ("Save");
 			Console.ReadLine ();
 		}
 	}
