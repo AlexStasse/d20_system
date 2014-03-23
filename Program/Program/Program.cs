@@ -30,21 +30,18 @@ namespace console
 						break;
 					case "C":
 						//Immediately run a new character editor.
-						Menu m = new Menu ();
-						//This runs a method to select which part of the character generator the user would like to visit
-						m.Editor ();
+						Menu.Editor ();
 						break;
 					default:
 						select = true;
 						break;
 					}
 				}
-				//Keeps the console open should the program reach this far, otherwise the console would immediately close.
-				Console.ReadLine ();
 			}
 		}
 	}
 
+	//Contains Loading and Saving functionality
 	class InOut
 	{
 			public void Load()
@@ -62,17 +59,17 @@ namespace console
 			}
 	}
 
-	//This class contains menu methods
+	//This class contains menu methods and shouldn't deal with any variables!
 	class Menu
 	{
 
 		//Select which character edit screen to go to
-		public void Editor()
+		public static void Editor()
 		{
+			charEdit c = new charEdit ();
 			bool select = true;
 			while (select == true) 
 			{
-				charEdit c = new charEdit ();
 				Console.Clear();
 				Console.WriteLine ("Character Editor\nSelect what you would like to change\n\n" +
 					"(A)bilities\n" +
@@ -83,6 +80,8 @@ namespace console
 					"(D)escription\n" +
 					"(B)ack to main menu");
 					
+				/*This is a series of menus which should call methods in the charEdit class to read/write variables and do calculations
+				 * while all the menu functionality should be kept here*/
 				switch (Console.ReadLine().ToUpper()) 
 				{
 				case "A":
@@ -118,12 +117,13 @@ namespace console
 	{
 
 		/*Bunch of methods used for each part of the character editing, all currently do nothing.  
-		 *Some of these may end up large so we can consider offloading them somewhere else maybe?*/
+		 *The Console.Writeline commands only exist to show the method was called and shouldn't be in the final program
+		 *and in fact none of these methods should read or write to/from the console at all when finished.*/
 		public void Abilities()
 		{
 			Console.Clear ();
 			Console.WriteLine ("Abilities");
-			//Console.ReadLine ();
+			Console.ReadLine ();
 		}
 		public void Race()
 		{
@@ -153,18 +153,6 @@ namespace console
 		{
 			Console.Clear ();
 			Console.WriteLine ("Description");
-			Console.ReadLine ();
-		}
-		public void Load()
-		{
-			Console.Clear ();
-			Console.WriteLine ("Load");
-			Console.ReadLine ();
-		}
-		public void Save()
-		{
-			Console.Clear ();
-			Console.WriteLine ("Save");
 			Console.ReadLine ();
 		}
 	}
