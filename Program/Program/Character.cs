@@ -8,10 +8,6 @@ using System.Runtime.CompilerServices;
 
 namespace Program
 {
-	public enum CharacterRace 
-	{
-		human, elf, dwarf, halfling, halfElf, halfOrc, gnome
-	};
 	public class Character
 	{
 		#region Character Stats
@@ -184,7 +180,8 @@ namespace Program
 			this.chaAlter = alterDefault;
 
 			// Default to human.
-			this.race = Character.CharacterRace.human;
+			//this.race = Character.CharacterRace.human;
+			this.race = CharacterRace.human;
 		}
 
 		private int calcStatMod(int stat)

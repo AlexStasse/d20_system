@@ -143,25 +143,25 @@ namespace Program
 				switch (Console.ReadLine ().ToUpper ())
 				{
 				case "1":
-                        character.chaRace = CharacterRace.dwarf;
+                        character.race = CharacterRace.dwarf;
 					break;
 				case "2":
-                        character.chaRace = Character.CharacterRace.elf;
+                        character.race = CharacterRace.elf;
 					break;
 				case "3":
-                    character.chaRace = Character.CharacterRace.gnome;
+                        character.race = CharacterRace.gnome;
 					break;
 				case "4":
-                        character.chaRace = Character.CharacterRace.halfElf;
+                        character.race = CharacterRace.halfElf;
 					break;
 				case "5":
-                        character.chaRace = Character.CharacterRace.halfling;
+                        character.race = CharacterRace.halfling;
 					break;
 				case "6":
-                        character.chaRace = Character.CharacterRace.halfOrc;
+                        character.race = CharacterRace.halfOrc;
 					break;
 				case "7":
-                        character.chaRace = Character.CharacterRace.human;
+                        character.race = CharacterRace.human;
 					break;
 				case "B":
 					racechange = false;
