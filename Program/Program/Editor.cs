@@ -18,7 +18,6 @@ namespace Program
                     "(F)eats\n" +
                     "(D)escription\n" +
                     "(B)ack to main menu");
-                Character c = new Character();
 
                 /*This is a series of menus which should call methods in the charEdit class to read/write variables and do calculations
                  * while all the menu functionality should be kept here*/
@@ -53,7 +52,6 @@ namespace Program
 
         public static void Abilities(Character character)
         {
-            Character newCharater = new Character();
             int pointcost = 0;
             bool abchange = true;
             while(abchange == true) 
@@ -67,9 +65,9 @@ namespace Program
                     "(I)ntelligence:\t {3} \t {9}\n" +
                     "(W)isdom:\t {4} \t {10}\n" +
                     "Cha(r)isma:\t {5} \t {11}\n",
-                    newCharater.strength, newCharater.dexterity, newCharater.constitution, newCharater.intelligence, newCharater.wisdom, 
-                    newCharater.charisma, newCharater.strMod, newCharater.dexMod, newCharater.conMod, newCharater.intMod, newCharater.wisdom,
-                    newCharater.chaMod, pointcost);
+                    character.strength, character.dexterity, character.constitution, character.intelligence, character.wisdom, 
+                    character.charisma, character.strMod, character.dexMod, character.conMod, character.intMod, character.wisMod,
+                    character.chaMod, pointcost);
 
                 Console.WriteLine("Change which Ability? Or go(B)ack.");
                 switch(Console.ReadLine().ToUpper()) 

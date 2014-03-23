@@ -164,12 +164,12 @@ namespace Program
 
 			// Ability Alter Defauling
 			int alterDefault = 0;
-			this.strength = alterDefault;
-			this.dexterity = alterDefault;
-			this.constitution = alterDefault;
-			this.intelligence = alterDefault;
-			this.wisdom = alterDefault;
-			this.charisma = alterDefault;
+			this.strAlter = alterDefault;
+			this.dexAlter = alterDefault;
+			this.conAlter = alterDefault;
+			this.intAlter = alterDefault;
+			this.wisAlter = alterDefault;
+			this.chaAlter = alterDefault;
 		}
 
 		private int calcStatMod(int stat)
