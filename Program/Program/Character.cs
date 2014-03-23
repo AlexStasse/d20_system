@@ -11,13 +11,15 @@ namespace Program
 	public class Character
 	{
 		#region Character Stats
-		// Charater stats. Using capitals because 'int' is a keyword.
+		// Character stats. Using capitals because 'int' is a keyword.
 		private int STR;
 		private int DEX;
 		private int CON;
 		private int INT;
 		private int WIS;
 		private int CHA;
+		private int[] points = {-4, -2, -1, 0, 1, 2, 3, 5, 7, 10, 13, 17};
+		private int pointcost;
 
 		// The get method calculates values then returns without the need for a function call.
 		public int strength
@@ -86,6 +88,17 @@ namespace Program
 				this.CHA = value;
 			}
 		}
+		public int pointvalue
+		{
+			get
+			{
+				return this.pointcost = points [strength - 7] + points [dexterity - 7] + points [constitution - 7] + points [intelligence - 7] + points [wisdom - 7] + points [charisma - 7];
+			}
+			set
+			{
+				this.pointcost = value;
+			}
+		}
 
 		// Tempory stat changes
 		public int strAlter;
@@ -140,11 +153,25 @@ namespace Program
 		}
 		#endregion
 
-		#region Charater Race
+		#region Character Race
+
+		private string RACE = "none";
+
 		public enum CharacterRace 
 		{
 			human, elf, dwarf, halfling, halfElf, halfOrc, gnome
 		};
+		public string chaRace
+		{
+			get
+			{
+				return this.RACE;
+			}
+			set
+			{
+				this.RACE = value;
+			}
+		}
 
 		public CharacterRace race;
 		#endregion
@@ -215,9 +242,6 @@ namespace Program
 			Console.ReadLine();
 		}
 		#endregion
-
-		// Fairly sure that this isn't how points are costed but whatevs.
-		// pointcost = points[STR-7] + points[DEX-7] +points[CON-7] +points[INT-7] +points[WIS-7] +points[CHA-7];
 	}
 }
 

@@ -27,7 +27,7 @@ namespace Program
                         Abilities(character);
                         break;
                     case "R":
-                        character.Race();
+						Race(character);
                         break;
                     case "C":
                         character.Class();
@@ -50,66 +50,67 @@ namespace Program
             }
         }
 
+		//-------------------------------------------------------------------------------------------------------------------------------------------
         public static void Abilities(Character character)
         {
-            int pointcost = 0;
             bool abchange = true;
             while (abchange == true)
             {
                 Console.Clear();
                 Console.WriteLine(
-                    "Abilities currently cost {12} points.\n\n" +
-                    "(S)trength:\t {0} \t {6}\n" +
-                    "(D)exterity:\t {1} \t {7}\n" +
-                    "(C)onstitution:\t {2} \t {8}\n" +
-                    "(I)ntelligence:\t {3} \t {9}\n" +
-                    "(W)isdom:\t {4} \t {10}\n" +
-                    "Cha(r)isma:\t {5} \t {11}\n",
+					"Abilities currently cost {12} points.\n" +
+					"10: Low Fantasy\n" +
+					"15: Standard Fantasy\n" +
+					"20: High Fantasy\n" +
+					"25: Epic Fantasy\n\n" +
+					"  Ability:\t Score\t Modifier\n" +
+					"(S)trength:\t   {0} \t    {6}\n" +
+					"(D)exterity:\t   {1} \t    {7}\n" +
+					"(C)onstitution:\t   {2} \t    {8}\n" +
+					"(I)ntelligence:\t   {3} \t    {9}\n" +
+					"(W)isdom:\t   {4} \t    {10}\n" +
+					"Cha(r)isma:\t   {5} \t    {11}\n",
                     character.strength, character.dexterity, character.constitution, character.intelligence, character.wisdom, 
                     character.charisma, character.strMod, character.dexMod, character.conMod, character.intMod, character.wisMod,
-                    character.chaMod, pointcost);
+					character.chaMod, character.pointvalue);
 
                 Console.WriteLine("Change which Ability? Or go(B)ack.");
-                switch (Console.ReadLine().ToUpper())
+				string select = Console.ReadLine ().ToUpper ();
+				Console.WriteLine("New Value(7 to 18):");
+				switch (select)
                 {
                     case "S":
                         int newval = 0;
-                        Console.WriteLine("New Value(7 to 18):");
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
                         character.strength = newval;
                         break;
                     case "D":
-                        Console.WriteLine("New Value(7 to 18):");
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
                         character.dexterity = newval;
                         break;
                     case "C":
-                        Console.WriteLine("New Value(7 to 18):");
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
                         character.constitution = newval;
                         break;
                     case "I":
-                        Console.WriteLine("New Value(7 to 18):");
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
                         character.intelligence = newval;
                         break;
                     case "W":
-                        Console.WriteLine("New Value(7 to 18):");
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
                         character.wisdom = newval;
                         break;
                     case "R":
-                        Console.WriteLine("New Value(7 to 18):");
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
@@ -121,6 +122,51 @@ namespace Program
                 }
             }
         }
+		public static void Race(Character character)
+		{
+			bool racechange = true;
+			while (racechange == true)
+			{
+				Console.Clear ();
+				Console.WriteLine ("Choose a Race, currently selected is {0}\n\n" +
+				"1) Dwarf\t +2Con, +2 Wis, -2 Cha\n" +
+				"2) Elf\t +2 Dex, +2 Int, -2 Con\n" +
+				"3) Gnome\t +2 Con, +2 Cha, -2 Str\n" +
+				"4) Half Elf\t +2 to one ability score of your choice\n" +
+				"5) Halfling\t +2 Dex, +2 Cha, -2 Str\n" +
+				"6) Half Orc\t +2 to one ability score of your choice\n" +
+				"7) Human\t +2 to one ability score of your choice\n" +
+				"B)ack", character.chaRace);
+
+				switch (Console.ReadLine ().ToUpper ())
+				{
+				case "1":
+					character.chaRace = "dwarf";
+					break;
+				case "2":
+					character.chaRace = "elf";
+					break;
+				case "3":
+					character.chaRace = "gnome";
+					break;
+				case "4":
+					character.chaRace = "halfElf";
+					break;
+				case "5":
+					character.chaRace = "halfling";
+					break;
+				case "6":
+					character.chaRace = "halfOrc";
+					break;
+				case "7":
+					character.chaRace = "human";
+					break;
+				case "B":
+					racechange = false;
+					break;
+				}
+			}
+		}
     }
 }
 
