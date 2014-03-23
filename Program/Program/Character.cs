@@ -177,6 +177,9 @@ namespace Program
 			return (stat / 2) - 5;
 		}
 
+
+		// These methods should be eventually removed as they are not needed for the character data. They are more
+		// presentation and should be in something like the Editor class.
 		public void Race()
 		{
 			Console.Clear();
@@ -213,6 +216,7 @@ namespace Program
 		}
 		#endregion
 
+		// Fairly sure that this isn't how points are costed but whatevs.
 		// pointcost = points[STR-7] + points[DEX-7] +points[CON-7] +points[INT-7] +points[WIS-7] +points[CHA-7];
 	}
 }
