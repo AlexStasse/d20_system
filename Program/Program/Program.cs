@@ -63,6 +63,7 @@ namespace Program
 	//This class contains menu methods and shouldn't deal with any variables!
 	class Menu
 	{
+        /*
         public static Character Abilities()
 		{
 			int pointcost = 0;
@@ -127,41 +128,6 @@ namespace Program
 				}
 			}
 		}
-	}
-	//This class contains the character editors
-	class charEdit
-	{
-		//sets up empty variables for a new character
-		
-
-		/*Bunch of methods used for each part of the character editing, all currently do nothing.  
-		 *The Console.Writeline commands only exist to show the method was called and shouldn't be in the final program
-		 *and in fact none of these methods should read or write to/from the console at all when finished.*/
-		public void Abilities(int[] character, out int[] character2, out int[] mods, out int pointcost)
-		{
-			int[] points = { -4, -2, -1, 0, 1, 2, 3, 5, 7, 10, 13, 17 };
-
-			int STR = character [0];
-			int DEX = character [1];
-			int CON = character [2];
-			int INT = character [3];
-			int WIS = character [4];
-			int CHA = character [5];
-
-			int STRmod = STR/2 - 5;
-			int DEXmod = DEX/2 - 5;
-			int CONmod = CON/2 - 5;
-			int INTmod = INT/2 - 5;
-			int WISmod = WIS/2 - 5;
-			int CHAmod = CHA/2 - 5;
-
-			pointcost = points[STR-7] + points[DEX-7] +points[CON-7] +points[INT-7] +points[WIS-7] +points[CHA-7];
-
-			//some shit goes here
-
-			character2 = new int[] {STR, DEX, CON, INT, WIS, CHA};
-			mods = new int[] {STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod};
-		}
-		
+  */      
 	}
 }

@@ -19,12 +19,20 @@ namespace Program
 			{
 				return this.strength - this.strAlter;
 			}
+			set
+			{
+				this.strength = value;
+			}
 		}
 		public int dexterity
 		{
 			get
 			{
 				return this.dexterity - this.dexAlter;
+			}
+			set
+			{
+				this.dexterity = value;
 			}
 		}
 		public int constitution
@@ -33,12 +41,20 @@ namespace Program
 			{
 				return this.constitution - this.conAlter;
 			}
+			set
+			{
+				this.constitution = value;
+			}
 		}
 		public int intelligence
 		{
 			get
 			{
 				return this.intelligence - this.intAlter;
+			}
+			set
+			{
+				this.intelligence = value;
 			}
 		}
 		public int wisdom
@@ -47,12 +63,20 @@ namespace Program
 			{
 				return this.wisdom - this.wisAlter;
 			}
+			set
+			{
+				this.wisdom = value;
+			}
 		}
 		public int charisma
 		{
 			get
 			{
 				return this.charisma - this.chaAlter;
+			}
+			set
+			{
+				this.charisma = value;
 			}
 		}
 
@@ -110,12 +134,12 @@ namespace Program
 		#endregion
 
 		#region Charater Race
-		public enum Race 
+		public enum CharacterRace 
 		{
 			human, elf, dwarf, halfling, halfElf, halfOrc, gnome
 		};
 
-		public Race race;
+		public CharacterRace race;
 		#endregion
 
 		#region Class Methods
@@ -144,6 +168,41 @@ namespace Program
 		private int calcStatMod(int stat)
 		{
 			return (stat / 2) - 5;
+		}
+
+		public void Race()
+		{
+			Console.Clear();
+			Console.WriteLine("Race");
+			Console.ReadLine();
+		}
+
+		public void Class()
+		{
+			Console.Clear();
+			Console.WriteLine("Class");
+			Console.ReadLine();
+		}
+
+		public void Skills()
+		{
+			Console.Clear();
+			Console.WriteLine("Skills");
+			Console.ReadLine();
+		}
+
+		public void Feats()
+		{
+			Console.Clear();
+			Console.WriteLine("Feats");
+			Console.ReadLine();
+		}
+
+		public void Description()
+		{
+			Console.Clear();
+			Console.WriteLine("Description");
+			Console.ReadLine();
 		}
 		#endregion
 

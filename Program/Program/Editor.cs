@@ -25,22 +25,22 @@ namespace Program
                 switch(Console.ReadLine().ToUpper()) 
                 {
                     case "A":
-                        Abilities(c, character);
+                        Abilities(character);
                         break;
                     case "R":
-                        c.Race();
+                        character.Race();
                         break;
                     case "C":
-                        c.Class();
+                        character.Class();
                         break;
                     case "S":
-                        c.Skills();
+                        character.Skills();
                         break;
                     case "F":
-                        c.Feats();
+                        character.Feats();
                         break;
                     case "D":
-                        c.Description();
+                        character.Description();
                         break;
                     case "B":
                         select = false;
@@ -50,40 +50,71 @@ namespace Program
                 }
             }
         }
-        public void Race()
-        {
-            Console.Clear();
-            Console.WriteLine("Race");
-            Console.ReadLine();
-        }
 
-        public void Class()
+        public static void Abilities(Character character)
         {
-            Console.Clear();
-            Console.WriteLine("Class");
-            Console.ReadLine();
-        }
+            int pointcost = 0;
+            bool abchange = true;
+            while(abchange == true) 
+            {
+                Console.Clear();
+                Character newCharater = new Character();
+                Console.WriteLine(
+                    "Abilities currently cost {12} points.\n\n" +
+                    "(S)trength:\t {0} \t {6}\n" +
+                    "(D)exterity:\t {1} \t {7}\n" +
+                    "(C)onstitution:\t {2} \t {8}\n" +
+                    "(I)ntelligence:\t {3} \t {9}\n" +
+                    "(W)isdom:\t {4} \t {10}\n" +
+                    "Cha(r)isma:\t {5} \t {11}\n",
+                    newCharater.strength, newCharater.dexterity, newCharater.constitution, newCharater.intelligence, newCharater.wisdom, 
+                    newCharater.charisma, newCharater.strMod, newCharater.dexMod, newCharater.conMod, newCharater.intMod, newCharater.wisdom,
+                    newCharater.chaMod, pointcost);
 
-        public void Skills()
-        {
-            Console.Clear();
-            Console.WriteLine("Skills");
-            Console.ReadLine();
-        }
+                Console.WriteLine("Change which Ability? Or go(B)ack.");
+                switch(Console.ReadLine().ToUpper()) 
+                {
+                    case "S":
+                        int newval = 0;
+                        Console.WriteLine("New Value(7 to 18):");
+                        int.TryParse(Console.ReadLine(), out newval);
+                        if(newval >= 7 && newval <= 18)
+                            character.strength = newval;
+                        break;
+                    case "D":
+                        Console.WriteLine("New Value(7 to 18):");
+                        int.TryParse(Console.ReadLine(), out newval);
+                        if(newval >= 7 && newval <= 18)
+                            character.dexterity = newval;
+                        break;
+                    case "C":
+                        Console.WriteLine("New Value(7 to 18):");
+                        int.TryParse(Console.ReadLine(), out newval);
+                        if(newval >= 7 && newval <= 18)
+                            character.constitution = newval;
+                        break;
+                    case "I":
+                        Console.WriteLine("New Value(7 to 18):");
+                        int.TryParse(Console.ReadLine(), out newval);
+                        if(newval >= 7 && newval <= 18)
+                            character.intelligence = newval;
+                        break;
+                    case "W":
+                        Console.WriteLine("New Value(7 to 18):");
+                        int.TryParse(Console.ReadLine(), out newval);
+                        if(newval >= 7 && newval <= 18)
+                            character.wisdom = newval;
+                        break;
+                    case "R":
+                        Console.WriteLine("New Value(7 to 18):");
+                        int.TryParse(Console.ReadLine(), out newval);
+                        if(newval >= 7 && newval <= 18)
+                            character.charisma = newval;
+                        break;
 
-        public void Feats()
-        {
-            Console.Clear();
-            Console.WriteLine("Feats");
-            Console.ReadLine();
-        }
-
-        public void Description()
-        {
-            Console.Clear();
-            Console.WriteLine("Description");
-            Console.ReadLine();
-        }
+                }
+            }
+    }
     }
 }
 
