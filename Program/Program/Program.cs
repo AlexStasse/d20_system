@@ -20,20 +20,21 @@ namespace console
 					select = false;
 					switch (Console.ReadLine().ToUpper())
 					{
-					case "L":
+					case "L": //Selected Load
 						InOut L = new InOut ();
 						L.Load ();
 						break;
-					case "S":
+					case "S": //Selected Save
 						InOut S = new InOut ();
 						S.Save ();
 						break;
-					case "C":
+					case "C": //Selected Create
 						int[] c; 
+						//newChar creates all the empty variables needed for a new character
 						c = charEdit.newChar ();
 						Menu.Editor (c);
 						break;
-					default:
+					default: //nothing selected, go to start of loop
 						select = true;
 						break;
 					}
@@ -80,36 +81,13 @@ namespace console
 					"(D)escription\n" +
 					"(B)ack to main menu");
 				charEdit c = new charEdit();
+
 				/*This is a series of menus which should call methods in the charEdit class to read/write variables and do calculations
 				 * while all the menu functionality should be kept here*/
 				switch (Console.ReadLine().ToUpper()) 
 				{
 				case "A":
-					int[] charnew;
-					int[] mods;
-					Console.Clear ();
-					c.Abilities (character, out charnew, out mods);
-					int STR = charnew [0];
-					int DEX = charnew [1];
-					int CON = charnew [2];
-					int INT = charnew [3];
-					int WIS = charnew [4];
-					int CHA = charnew [5];
-					int STRmod = mods [0];
-					int DEXmod = mods [1];
-					int CONmod = mods [2];
-					int INTmod = mods [3];
-					int WISmod = mods [4];
-					int CHAmod = mods [5];
-					Console.WriteLine ("Abilities:\n\n" +
-						"Strength:\t {0} \t {6}\n" +
-						"Dexterity:\t {1} \t {7}\n" +
-						"Constitution:\t {2} \t {8}\n" +
-						"Intelligence:\t {3} \t {9}\n" +
-						"Wisdom:\t\t {4} \t {10}\n" +
-						"Charisma:\t {5} \t {11}\n",
-						STR, DEX, CON, INT, WIS, CHA, STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod);
-					Console.ReadLine ();
+					Abilities (c, character);
 					break;
 				case "R":
 					c.Race ();
@@ -134,6 +112,83 @@ namespace console
 				}
 			}
 		}
+
+		public static void Abilities(console.charEdit c, int[] character)
+		{
+			int[] charnew;
+			int[] mods;
+			int pointcost = 0;
+			bool abchange = true;
+			while (abchange == true) 
+			{
+				Console.Clear ();
+				c.Abilities (character, out charnew, out mods, out pointcost);
+				character = charnew;
+				int STR = charnew [0];
+				int DEX = charnew [1];
+				int CON = charnew [2];
+				int INT = charnew [3];
+				int WIS = charnew [4];
+				int CHA = charnew [5];
+				int STRmod = mods [0];
+				int DEXmod = mods [1];
+				int CONmod = mods [2];
+				int INTmod = mods [3];
+				int WISmod = mods [4];
+				int CHAmod = mods [5];
+				Console.WriteLine ("Abilities currently cost {12} points.\n\n" +
+				"(S)trength:\t {0} \t {6}\n" +
+				"(D)exterity:\t {1} \t {7}\n" +
+				"(C)onstitution:\t {2} \t {8}\n" +
+				"(I)ntelligence:\t {3} \t {9}\n" +
+				"(W)isdom:\t {4} \t {10}\n" +
+				"Cha(r)isma:\t {5} \t {11}\n",
+					STR, DEX, CON, INT, WIS, CHA, STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod, pointcost);
+
+				Console.WriteLine ("Change which Ability? Or go (B)ack.");
+				switch (Console.ReadLine ().ToUpper ()) 
+				{
+				case "S":
+					int newval = 0;
+					Console.WriteLine ("New Value (7 to 18):");
+					int.TryParse(Console.ReadLine (), out newval);
+					if (newval >= 7 && newval <= 18)
+						character [0] = newval;
+					break;
+				case "D":
+					Console.WriteLine ("New Value (7 to 18):");
+					int.TryParse(Console.ReadLine (), out newval);
+					if (newval >= 7 && newval <= 18)
+						character [1] = newval;
+					break;
+				case "C":
+					Console.WriteLine ("New Value (7 to 18):");
+					int.TryParse(Console.ReadLine (), out newval);
+					if (newval >= 7 && newval <= 18)
+						character [2] = newval;
+					break;
+				case "I":
+					Console.WriteLine ("New Value (7 to 18):");
+					int.TryParse(Console.ReadLine (), out newval);
+					if (newval >= 7 && newval <= 18)
+						character [3] = newval;
+					break;
+				case "W":
+					Console.WriteLine ("New Value (7 to 18):");
+					int.TryParse(Console.ReadLine (), out newval);
+					if (newval >= 7 && newval <= 18)
+						character [4] = newval;
+					break;
+				case "R":
+					Console.WriteLine ("New Value (7 to 18):");
+					int.TryParse(Console.ReadLine (), out newval);
+					if (newval >= 7 && newval <= 18)
+						character [5] = newval;
+					break;
+
+				}
+			}
+		}
 	}
 
 	//This class contains the character editors
@@ -155,8 +210,10 @@ namespace console
 		/*Bunch of methods used for each part of the character editing, all currently do nothing.  
 		 *The Console.Writeline commands only exist to show the method was called and shouldn't be in the final program
 		 *and in fact none of these methods should read or write to/from the console at all when finished.*/
-		public void Abilities(int[] character, out int[] character2, out int[] mods)
+		public void Abilities(int[] character, out int[] character2, out int[] mods, out int pointcost)
 		{
+			int[] points = { -4, -2, -1, 0, 1, 2, 3, 5, 7, 10, 13, 17 };
+
 			int STR = character [0];
 			int DEX = character [1];
 			int CON = character [2];
@@ -170,6 +227,8 @@ namespace console
 			int INTmod = INT/2 - 5;
 			int WISmod = WIS/2 - 5;
 			int CHAmod = CHA/2 - 5;
+
+			pointcost = points[STR-7] + points[DEX-7] +points[CON-7] +points[INT-7] +points[WIS-7] +points[CHA-7];
 
 			//some shit goes here
 
