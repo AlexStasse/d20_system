@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Program
 {
@@ -7,16 +8,13 @@ namespace Program
     {
         public void Load()
         {
-            Console.Clear();
-            Console.WriteLine("Load");
-            Console.ReadLine();
+		
+
         }
 
         public void Save()
         {
-            Console.Clear();
-            Console.WriteLine("Save");
-            Console.ReadLine();
+
         }
     }
 }

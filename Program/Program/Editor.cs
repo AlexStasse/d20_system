@@ -141,29 +141,71 @@ namespace Program
 				switch (Console.ReadLine ().ToUpper ())
 				{
 				case "1":
-                        character.race = CharacterRace.Dwarf;
+					character.race = CharacterRace.Dwarf;
+					character.RaceStatMod ();
 					break;
 				case "2":
-                        character.race = CharacterRace.Elf;
+                    character.race = CharacterRace.Elf;
+					character.RaceStatMod ();
 					break;
 				case "3":
-                        character.race = CharacterRace.Gnome;
+                    character.race = CharacterRace.Gnome;
+					character.RaceStatMod ();
 					break;
 				case "4":
-                        character.race = CharacterRace.HalfElf;
+					character.race = CharacterRace.HalfElf;
+					StatChoice (character);
 					break;
 				case "5":
-                        character.race = CharacterRace.Halfling;
+                    character.race = CharacterRace.Halfling;
+					character.RaceStatMod ();
 					break;
 				case "6":
-                        character.race = CharacterRace.HalfOrc;
+                    character.race = CharacterRace.HalfOrc;
+					StatChoice (character);
 					break;
 				case "7":
-                        character.race = CharacterRace.Human;
+                    character.race = CharacterRace.Human;
+					StatChoice (character);
 					break;
 				case "B":
 					racechange = false;
 					break;
+				}
+			}
+		}
+		public static void StatChoice(Character character)
+		{
+			Console.WriteLine ("Choose an Ability Score to increase by 2 points:\n" +
+			"(S)trength, (D)exterity, (C)onstitution, (I)ntelligence, (W)isdom, (C)harisma");
+			string select = Console.ReadLine ().ToUpper ();
+			bool statselect = true;
+			while (statselect == true)
+			{
+				statselect = false;
+			switch (select)
+			{
+			case "S":
+					character.strAlter -= 2;
+				break;
+			case "D":
+					character.dexAlter -= 2;
+				break;
+			case "C":
+					character.conAlter -= 2;
+				break;
+			case "I":
+					character.intAlter -= 2;
+				break;
+			case "W":
+					character.wisAlter -= 2;
+				break;
+			case "R":
+					character.chaAlter -= 2;
+				break;
+			default:
+				statselect = true;
+				break;
 				}
 			}
 		}

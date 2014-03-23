@@ -12,6 +12,7 @@ namespace Program
 	{
 		Elf, Dwarf, Gnome, HalfElf, Halfling, HalfOrc, Human
 	};
+	[SerializableAttribute]
 	public class Character
 	{
 		#region Character Stats
@@ -96,7 +97,7 @@ namespace Program
 		{
 			get
 			{
-				return this.pointcost = points [strength - 7] + points [dexterity - 7] + points [constitution - 7] + points [intelligence - 7] + points [wisdom - 7] + points [charisma - 7];
+				return this.pointcost = points [STR - 7] + points [DEX - 7] + points [CON - 7] + points [INT - 7] + points [WIS - 7] + points [CHA - 7];
 			}
 			set
 			{
@@ -159,6 +160,35 @@ namespace Program
 
 		#region Character Race
 		public CharacterRace race;
+	
+		public void RaceStatMod ()
+		{
+			switch (race)
+			{
+			case CharacterRace.Dwarf:
+				conAlter -= 2;
+				wisAlter -= 2;
+				chaAlter += 2;
+				break;
+			case CharacterRace.Elf:
+				dexAlter -= 2;
+				intAlter -= 2;
+				conAlter += 2;
+				break;
+			case CharacterRace.Gnome:
+				conAlter -= 2;
+				chaAlter -= 2;
+				strAlter += 2;
+				break;
+			case CharacterRace.Halfling:
+				dexAlter -= 2;
+				chaAlter -= 2;
+				strAlter += 2;
+				break;
+			default:
+				break;
+			}
+		}
 		#endregion
 
 		#region Class Methods
