@@ -2,12 +2,6 @@
 
 namespace Program
 {
-
-    public enum CharacterRace 
-    {
-        human, elf, dwarf, halfling, halfElf, halfOrc, gnome
-    };
-
 	class MainClass
 	{
 		//C# programs always start from the Main method

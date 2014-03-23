@@ -128,40 +128,38 @@ namespace Program
 			while (racechange == true)
 			{
 				Console.Clear ();
-                //Console.WriteLine ("Choose a Race, currently selected is {0}\n\n" +
-                Console.WriteLine ("Choose a Race, currently selected is <NOT IMPLEMENTED>\n\n" +
+                Console.WriteLine ("Choose a Race, currently selected is {0}\n\n" +
 				"1) Dwarf\t +2Con, +2 Wis, -2 Cha\n" +
-				"2) Elf\t +2 Dex, +2 Int, -2 Con\n" +
+                "2) Elf\t\t +2 Dex, +2 Int, -2 Con\n" +
 				"3) Gnome\t +2 Con, +2 Cha, -2 Str\n" +
 				"4) Half Elf\t +2 to one ability score of your choice\n" +
 				"5) Halfling\t +2 Dex, +2 Cha, -2 Str\n" +
 				"6) Half Orc\t +2 to one ability score of your choice\n" +
 				"7) Human\t +2 to one ability score of your choice\n" +
-                    //"B)ack", character.chaRace);
-                "B)ack");
+                    "B)ack", character.race);
 
 				switch (Console.ReadLine ().ToUpper ())
 				{
 				case "1":
-                        character.race = CharacterRace.dwarf;
+                        character.race = CharacterRace.Dwarf;
 					break;
 				case "2":
-                        character.race = CharacterRace.elf;
+                        character.race = CharacterRace.Elf;
 					break;
 				case "3":
-                        character.race = CharacterRace.gnome;
+                        character.race = CharacterRace.Gnome;
 					break;
 				case "4":
-                        character.race = CharacterRace.halfElf;
+                        character.race = CharacterRace.HalfElf;
 					break;
 				case "5":
-                        character.race = CharacterRace.halfling;
+                        character.race = CharacterRace.Halfling;
 					break;
 				case "6":
-                        character.race = CharacterRace.halfOrc;
+                        character.race = CharacterRace.HalfOrc;
 					break;
 				case "7":
-                        character.race = CharacterRace.human;
+                        character.race = CharacterRace.Human;
 					break;
 				case "B":
 					racechange = false;
