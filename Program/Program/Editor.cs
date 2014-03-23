@@ -7,21 +7,21 @@ namespace Program
         public static void editor(Character character)
         {
             bool select = true;
-            while(select == true) 
+            while (select == true)
             {
                 Console.Clear();
                 Console.WriteLine("Character Editor\nSelect what you would like to change\n\n" +
-                    "(A)bilities\n" +
-                    "(R)ace\n" +
-                    "(C)lass\n" +
-                    "(S)kills\n" +
-                    "(F)eats\n" +
-                    "(D)escription\n" +
-                    "(B)ack to main menu");
+                "(A)bilities\n" +
+                "(R)ace\n" +
+                "(C)lass\n" +
+                "(S)kills\n" +
+                "(F)eats\n" +
+                "(D)escription\n" +
+                "(B)ack to main menu");
 
                 /*This is a series of menus which should call methods in the charEdit class to read/write variables and do calculations
                  * while all the menu functionality should be kept here*/
-                switch(Console.ReadLine().ToUpper()) 
+                switch (Console.ReadLine().ToUpper())
                 {
                     case "A":
                         Abilities(character);
@@ -54,7 +54,7 @@ namespace Program
         {
             int pointcost = 0;
             bool abchange = true;
-            while(abchange == true) 
+            while (abchange == true)
             {
                 Console.Clear();
                 Console.WriteLine(
@@ -70,7 +70,7 @@ namespace Program
                     character.chaMod, pointcost);
 
                 Console.WriteLine("Change which Ability? Or go(B)ack.");
-                switch(Console.ReadLine().ToUpper()) 
+                switch (Console.ReadLine().ToUpper())
                 {
                     case "S":
                         int newval = 0;
@@ -78,48 +78,42 @@ namespace Program
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
-                        if(newval >= 7 && newval <= 18)
-                            character.strength = newval;
+                        character.strength = newval;
                         break;
                     case "D":
                         Console.WriteLine("New Value(7 to 18):");
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
-                        if(newval >= 7 && newval <= 18)
-                            character.dexterity = newval;
+                        character.dexterity = newval;
                         break;
                     case "C":
                         Console.WriteLine("New Value(7 to 18):");
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
-                        if(newval >= 7 && newval <= 18)
-                            character.constitution = newval;
+                        character.constitution = newval;
                         break;
                     case "I":
                         Console.WriteLine("New Value(7 to 18):");
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
-                        if(newval >= 7 && newval <= 18)
-                            character.intelligence = newval;
+                        character.intelligence = newval;
                         break;
                     case "W":
                         Console.WriteLine("New Value(7 to 18):");
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
-                        if(newval >= 7 && newval <= 18)
-                            character.wisdom = newval;
+                        character.wisdom = newval;
                         break;
                     case "R":
                         Console.WriteLine("New Value(7 to 18):");
                         int.TryParse(Console.ReadLine(), out newval);
                         newval = newval < 7 ? 7 : newval;
                         newval = newval > 18 ? 18 : newval;
-                        if(newval >= 7 && newval <= 18)
-                            character.charisma = newval;
+                        character.charisma = newval;
                         break;
                     case "B":
                         abchange = false;
