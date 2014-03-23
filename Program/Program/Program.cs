@@ -1,38 +1,37 @@
 ﻿using System;
 
-namespace console
+namespace Program
 {
 	class MainClass
 	{
 		//C# programs always start from the Main method
-		public static void Main (string[] args)
+		public static void Main(string[] args)
 		{
-			while (true) 
+			while(true) 
 			{
 				//Clear the console if we come back to the program start and give user options.
 				Console.Clear();
-				Console.WriteLine ("Welcome to the character manager\n" +
-					"(L)oad, (S)ave or (C)reate new character");
+				Console.WriteLine("Welcome to the character manager\n" +
+					"(L)oad,(S)ave or(C)reate new character");
 
 				bool select = true;
-				while (select == true) 
+				while(select == true) 
 				{
 					select = false;
-					switch (Console.ReadLine().ToUpper())
+					switch(Console.ReadLine().ToUpper())
 					{
 					case "L": //Selected Load
-						InOut L = new InOut ();
-						L.Load ();
+						InOut L = new InOut();
+						L.Load();
 						break;
 					case "S": //Selected Save
-						InOut S = new InOut ();
-						S.Save ();
+						InOut S = new InOut();
+						S.Save();
 						break;
 					case "C": //Selected Create
-						int[] c; 
 						//newChar creates all the empty variables needed for a new character
-						c = charEdit.newChar ();
-						Menu.Editor (c);
+                        Character c = new Character();
+                        Program.Editor.editor(c);
 						break;
 					default: //nothing selected, go to start of loop
 						select = true;
@@ -48,141 +47,80 @@ namespace console
 	{
 			public void Load()
 			{
-				Console.Clear ();
-				Console.WriteLine ("Load");
-				Console.ReadLine ();
+                Console.Clear();
+				Console.WriteLine("Load");
+				Console.ReadLine();
 			}
 
 			public void Save()
 			{
-				Console.Clear ();
-				Console.WriteLine ("Save");
-				Console.ReadLine ();
+				Console.Clear();
+				Console.WriteLine("Save");
+				Console.ReadLine();
 			}
 	}
 
 	//This class contains menu methods and shouldn't deal with any variables!
 	class Menu
 	{
-
-		//Select which character edit screen to go to
-		public static void Editor(int[] character)
+        public static Character Abilities()
 		{
-			bool select = true;
-			while (select == true) 
-			{
-				Console.Clear();
-				Console.WriteLine ("Character Editor\nSelect what you would like to change\n\n" +
-					"(A)bilities\n" +
-					"(R)ace\n" +
-					"(C)lass\n" +
-					"(S)kills\n" +
-					"(F)eats\n" +
-					"(D)escription\n" +
-					"(B)ack to main menu");
-				charEdit c = new charEdit();
-
-				/*This is a series of menus which should call methods in the charEdit class to read/write variables and do calculations
-				 * while all the menu functionality should be kept here*/
-				switch (Console.ReadLine().ToUpper()) 
-				{
-				case "A":
-					Abilities (c, character);
-					break;
-				case "R":
-					c.Race ();
-					break;
-				case "C":
-					c.Class ();
-					break;
-				case "S":
-					c.Skills ();
-					break;
-				case "F":
-					c.Feats ();
-					break;
-				case "D":
-					c.Description ();
-					break;
-				case "B":
-					select = false;
-					break;
-				default:
-					break;
-				}
-			}
-		}
-
-		public static void Abilities(console.charEdit c, int[] character)
-		{
-			int[] charnew;
-			int[] mods;
 			int pointcost = 0;
 			bool abchange = true;
-			while (abchange == true) 
+			while(abchange == true) 
 			{
-				Console.Clear ();
-				c.Abilities (character, out charnew, out mods, out pointcost);
-				character = charnew;
-				int STR = charnew [0];
-				int DEX = charnew [1];
-				int CON = charnew [2];
-				int INT = charnew [3];
-				int WIS = charnew [4];
-				int CHA = charnew [5];
-				int STRmod = mods [0];
-				int DEXmod = mods [1];
-				int CONmod = mods [2];
-				int INTmod = mods [3];
-				int WISmod = mods [4];
-				int CHAmod = mods [5];
-				Console.WriteLine ("Abilities currently cost {12} points.\n\n" +
-				"(S)trength:\t {0} \t {6}\n" +
-				"(D)exterity:\t {1} \t {7}\n" +
-				"(C)onstitution:\t {2} \t {8}\n" +
-				"(I)ntelligence:\t {3} \t {9}\n" +
-				"(W)isdom:\t {4} \t {10}\n" +
-				"Cha(r)isma:\t {5} \t {11}\n",
-					STR, DEX, CON, INT, WIS, CHA, STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod, pointcost);
+				Console.Clear();
+                Character newCharater = new Character();
+				Console.WriteLine(
+                    "Abilities currently cost {12} points.\n\n" +
+				    "(S)trength:\t {0} \t {6}\n" +
+				    "(D)exterity:\t {1} \t {7}\n" +
+				    "(C)onstitution:\t {2} \t {8}\n" +
+				    "(I)ntelligence:\t {3} \t {9}\n" +
+				    "(W)isdom:\t {4} \t {10}\n" +
+				    "Cha(r)isma:\t {5} \t {11}\n",
+                    newCharater.strength, newCharater.dexterity, newCharater.constitution, newCharater.intelligence, newCharater.wisdom, 
+                    newCharater.charisma, newCharater.strMod, newCharater.dexMod, newCharater.conMod, newCharater.intMod, newCharater.wisdom,
+                    newCharater.chaMod, pointcost);
 
-				Console.WriteLine ("Change which Ability? Or go (B)ack.");
-				switch (Console.ReadLine ().ToUpper ()) 
+				Console.WriteLine("Change which Ability? Or go(B)ack.");
+				switch(Console.ReadLine().ToUpper()) 
 				{
 				case "S":
 					int newval = 0;
-					Console.WriteLine ("New Value (7 to 18):");
-					int.TryParse(Console.ReadLine (), out newval);
-					if (newval >= 7 && newval <= 18)
+					Console.WriteLine("New Value(7 to 18):");
+					int.TryParse(Console.ReadLine(), out newval);
+					if(newval >= 7 && newval <= 18)
 						character [0] = newval;
 					break;
 				case "D":
-					Console.WriteLine ("New Value (7 to 18):");
-					int.TryParse(Console.ReadLine (), out newval);
-					if (newval >= 7 && newval <= 18)
+					Console.WriteLine("New Value(7 to 18):");
+					int.TryParse(Console.ReadLine(), out newval);
+					if(newval >= 7 && newval <= 18)
 						character [1] = newval;
 					break;
 				case "C":
-					Console.WriteLine ("New Value (7 to 18):");
-					int.TryParse(Console.ReadLine (), out newval);
-					if (newval >= 7 && newval <= 18)
+					Console.WriteLine("New Value(7 to 18):");
+					int.TryParse(Console.ReadLine(), out newval);
+					if(newval >= 7 && newval <= 18)
 						character [2] = newval;
 					break;
 				case "I":
-					Console.WriteLine ("New Value (7 to 18):");
-					int.TryParse(Console.ReadLine (), out newval);
-					if (newval >= 7 && newval <= 18)
+					Console.WriteLine("New Value(7 to 18):");
+					int.TryParse(Console.ReadLine(), out newval);
+					if(newval >= 7 && newval <= 18)
 						character [3] = newval;
 					break;
 				case "W":
-					Console.WriteLine ("New Value (7 to 18):");
-					int.TryParse(Console.ReadLine (), out newval);
-					if (newval >= 7 && newval <= 18)
+					Console.WriteLine("New Value(7 to 18):");
+					int.TryParse(Console.ReadLine(), out newval);
+					if(newval >= 7 && newval <= 18)
 						character [4] = newval;
 					break;
 				case "R":
-					Console.WriteLine ("New Value (7 to 18):");
-					int.TryParse(Console.ReadLine (), out newval);
-					if (newval >= 7 && newval <= 18)
+					Console.WriteLine("New Value(7 to 18):");
+					int.TryParse(Console.ReadLine(), out newval);
+					if(newval >= 7 && newval <= 18)
 						character [5] = newval;
 					break;
 
@@ -190,22 +128,11 @@ namespace console
 			}
 		}
 	}
-
 	//This class contains the character editors
 	class charEdit
 	{
 		//sets up empty variables for a new character
-		public static int[] newChar()
-		{
-			int STR = 7;
-			int DEX = 8;
-			int CON = 9;
-			int INT = 10;
-			int WIS = 11;
-			int CHA = 12;
-			int[] abilities = {STR, DEX, CON, INT, WIS, CHA};
-			return abilities;
-		}
+		
 
 		/*Bunch of methods used for each part of the character editing, all currently do nothing.  
 		 *The Console.Writeline commands only exist to show the method was called and shouldn't be in the final program
@@ -235,35 +162,6 @@ namespace console
 			character2 = new int[] {STR, DEX, CON, INT, WIS, CHA};
 			mods = new int[] {STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod};
 		}
-		public void Race()
-		{
-			Console.Clear ();
-			Console.WriteLine ("Race");
-			Console.ReadLine ();
-		}
-		public void Class()
-		{
-			Console.Clear ();
-			Console.WriteLine ("Class");
-			Console.ReadLine ();
-		}
-		public void Skills()
-		{
-			Console.Clear ();
-			Console.WriteLine ("Skills");
-			Console.ReadLine ();
-		}
-		public void Feats()
-		{
-			Console.Clear ();
-			Console.WriteLine ("Feats");
-			Console.ReadLine ();
-		}
-		public void Description()
-		{
-			Console.Clear ();
-			Console.WriteLine ("Description");
-			Console.ReadLine ();
-		}
+		
 	}
 }
