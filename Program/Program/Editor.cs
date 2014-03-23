@@ -53,12 +53,12 @@ namespace Program
 
         public static void Abilities(Character character)
         {
+            Character newCharater = new Character();
             int pointcost = 0;
             bool abchange = true;
             while(abchange == true) 
             {
                 Console.Clear();
-                Character newCharater = new Character();
                 Console.WriteLine(
                     "Abilities currently cost {12} points.\n\n" +
                     "(S)trength:\t {0} \t {6}\n" +

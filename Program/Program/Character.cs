@@ -11,72 +11,79 @@ namespace Program
 	public class Character
 	{
 		#region Character Stats
-		// Charater stats.
+		// Charater stats. Using capitals because 'int' is a keyword.
+		private int STR;
+		private int DEX;
+		private int CON;
+		private int INT;
+		private int WIS;
+		private int CHA;
+
 		// The get method calculates values then returns without the need for a function call.
 		public int strength
 		{
 			get
 			{
-				return this.strength - this.strAlter;
+				return this.STR - this.strAlter;
 			}
 			set
 			{
-				this.strength = value;
+				this.STR = value;
 			}
 		}
 		public int dexterity
 		{
 			get
 			{
-				return this.dexterity - this.dexAlter;
+				return this.DEX - this.dexAlter;
 			}
 			set
 			{
-				this.dexterity = value;
+				this.DEX = value;
 			}
 		}
 		public int constitution
 		{
 			get
 			{
-				return this.constitution - this.conAlter;
+				return this.CON - this.conAlter;
 			}
 			set
 			{
-				this.constitution = value;
+				this.CON = value;
 			}
 		}
 		public int intelligence
 		{
 			get
 			{
-				return this.intelligence - this.intAlter;
+				return this.INT - this.intAlter;
 			}
 			set
 			{
-				this.intelligence = value;
+				this.INT = value;
 			}
 		}
 		public int wisdom
 		{
 			get
 			{
-				return this.wisdom - this.wisAlter;
+				return this.WIS - this.wisAlter;
 			}
 			set
 			{
-				this.wisdom = value;
+				this.WIS = value;
 			}
 		}
 		public int charisma
 		{
 			get
 			{
-				return this.charisma - this.chaAlter;
+				return this.CHA - this.chaAlter;
 			}
 			set
 			{
-				this.charisma = value;
+				this.CHA = value;
 			}
 		}
 

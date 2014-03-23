@@ -31,7 +31,7 @@ namespace Program
 					case "C": //Selected Create
 						//newChar creates all the empty variables needed for a new character
                         Character c = new Character();
-                        Program.Editor.editor(c);
+                        Editor.editor(c);
 						break;
 					default: //nothing selected, go to start of loop
 						select = true;
