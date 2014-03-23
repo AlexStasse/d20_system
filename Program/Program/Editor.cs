@@ -128,7 +128,8 @@ namespace Program
 			while (racechange == true)
 			{
 				Console.Clear ();
-				Console.WriteLine ("Choose a Race, currently selected is {0}\n\n" +
+                //Console.WriteLine ("Choose a Race, currently selected is {0}\n\n" +
+                Console.WriteLine ("Choose a Race, currently selected is <NOT IMPLEMENTED>\n\n" +
 				"1) Dwarf\t +2Con, +2 Wis, -2 Cha\n" +
 				"2) Elf\t +2 Dex, +2 Int, -2 Con\n" +
 				"3) Gnome\t +2 Con, +2 Cha, -2 Str\n" +
@@ -136,30 +137,31 @@ namespace Program
 				"5) Halfling\t +2 Dex, +2 Cha, -2 Str\n" +
 				"6) Half Orc\t +2 to one ability score of your choice\n" +
 				"7) Human\t +2 to one ability score of your choice\n" +
-				"B)ack", character.chaRace);
+                    //"B)ack", character.chaRace);
+                "B)ack");
 
 				switch (Console.ReadLine ().ToUpper ())
 				{
 				case "1":
-					character.chaRace = "dwarf";
+                        character.chaRace = CharacterRace.dwarf;
 					break;
 				case "2":
-					character.chaRace = "elf";
+                        character.chaRace = Character.CharacterRace.elf;
 					break;
 				case "3":
-					character.chaRace = "gnome";
+                    character.chaRace = Character.CharacterRace.gnome;
 					break;
 				case "4":
-					character.chaRace = "halfElf";
+                        character.chaRace = Character.CharacterRace.halfElf;
 					break;
 				case "5":
-					character.chaRace = "halfling";
+                        character.chaRace = Character.CharacterRace.halfling;
 					break;
 				case "6":
-					character.chaRace = "halfOrc";
+                        character.chaRace = Character.CharacterRace.halfOrc;
 					break;
 				case "7":
-					character.chaRace = "human";
+                        character.chaRace = Character.CharacterRace.human;
 					break;
 				case "B":
 					racechange = false;

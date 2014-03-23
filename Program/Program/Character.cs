@@ -8,6 +8,10 @@ using System.Runtime.CompilerServices;
 
 namespace Program
 {
+	public enum CharacterRace 
+	{
+		human, elf, dwarf, halfling, halfElf, halfOrc, gnome
+	};
 	public class Character
 	{
 		#region Character Stats
@@ -154,25 +158,6 @@ namespace Program
 		#endregion
 
 		#region Character Race
-
-		private string RACE = "none";
-
-		public enum CharacterRace 
-		{
-			human, elf, dwarf, halfling, halfElf, halfOrc, gnome
-		};
-		public string chaRace
-		{
-			get
-			{
-				return this.RACE;
-			}
-			set
-			{
-				this.RACE = value;
-			}
-		}
-
 		public CharacterRace race;
 		#endregion
 
@@ -180,7 +165,7 @@ namespace Program
 		// Class methods.
 		public Character()
 		{
-			// Stat defaulting
+			// Stat defaulting.
 			int statDefault = 10;
 			this.strength = statDefault;
 			this.dexterity = statDefault;
@@ -189,7 +174,7 @@ namespace Program
 			this.wisdom = statDefault;
 			this.charisma = statDefault;
 
-			// Ability Alter Defauling
+			// Ability Alter Defauling.
 			int alterDefault = 0;
 			this.strAlter = alterDefault;
 			this.dexAlter = alterDefault;
@@ -197,6 +182,9 @@ namespace Program
 			this.intAlter = alterDefault;
 			this.wisAlter = alterDefault;
 			this.chaAlter = alterDefault;
+
+			// Default to human.
+			this.race = Character.CharacterRace.human;
 		}
 
 		private int calcStatMod(int stat)
