@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Program
 {
@@ -23,7 +24,10 @@ namespace Program
 					{
 					case "L": //Selected Load
 						InOut L = new InOut ();
-						Console.WriteLine ("Insert Filename");
+						Console.Clear ();
+						Console.WriteLine ("Select Character to load:");
+						string files = L.Files ();
+						Console.WriteLine (files);
 						string filename = Console.ReadLine () + ".char";
 						character = L.Load(filename);
                     case "C": //Selected Create

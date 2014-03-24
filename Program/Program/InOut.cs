@@ -25,6 +25,19 @@ namespace Program
 			bFormatter.Serialize(stream, character);
 			stream.Close();
 		}
+		public string Files()
+		{
+			string path = Directory.GetCurrentDirectory ();
+			string[] files = Directory.GetFiles (path, "*.char");
+			string files2 = "";
+			foreach (string j in files)
+			{
+				string k = j.Replace (path + "\\", "");
+				k = k.Replace (".char", "");
+				files2 += "\n" + k;
+			}
+			return files2;
+		}
     }
 }
 

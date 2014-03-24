@@ -46,16 +46,44 @@ namespace Program
                         select = false;
                         break;
 					case "V": //Selected Save
-						InOut S = new InOut ();
-						Console.WriteLine ("Insert Filename");
-						string filename = Console.ReadLine () + ".char";
-						S.Save(filename, character);
+					savemenu (character);
 						break;
                     default:
                         break;
                 }
             }
         }
+		public static void savemenu(Character character)
+		{
+			bool save = true;
+			while (save == true)
+			{
+				save = false;
+				InOut S = new InOut ();
+				Console.WriteLine ("Insert Filename");
+				string filename = Console.ReadLine () + ".char";
+				string files = S.Files();
+				if (files.Contains (filename))
+					Console.WriteLine ("Character File Exists! Overwrite? (Y/N)");
+					bool confirm = true;
+					while (confirm == true)
+					{
+						confirm = false;
+						switch (Console.ReadLine ())
+						{
+						case "Y":
+							break;
+						case "N":
+							save = true;
+							break;
+						default:
+							confirm = true;
+							break;
+						}
+					}
+				S.Save (filename, character);
+			}
+		}
         //-------------------------------------------------------------------------------------------------------------------------------------------
         public static void Abilities(Character character)
         {
