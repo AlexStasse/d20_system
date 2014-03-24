@@ -26,6 +26,18 @@ namespace Program
 	[Serializable()]
 	public class Character : ISerializable
     {
+		public Character(SerializationInfo info, StreamingContext ctxt)
+		{
+			this.STR = (int)info.GetValue("Strength", typeof(int));
+			this.DEX = (int)info.GetValue("Dexterity", typeof(int));
+			this.CON = (int)info.GetValue("Constitution", typeof(int));
+			this.INT = (int)info.GetValue("Intelligence", typeof(int));
+			this.WIS = (int)info.GetValue("Wisdom", typeof(int));
+			this.CHA = (int)info.GetValue("Charisma", typeof(int));
+
+			this.race = (CharacterRace)info.GetValue ("Race", typeof(CharacterRace));
+		}
+
 		public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
 		{
 			info.AddValue ("Strength", this.STR);
