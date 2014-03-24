@@ -8,26 +8,35 @@ namespace Program
     //Contains Loading and Saving functionality
     class InOut
     {
+		public string path = Directory.GetCurrentDirectory () + "\\characters\\";
+
+		public void createdir()
+		{
+			DirectoryInfo d = Directory.CreateDirectory(path);
+		}
+
 		public Character Load(string filename)
         {
 			Character character = new Character();
-			Stream stream = File.Open(filename, FileMode.Open);
+			Stream stream = File.Open(path + filename, FileMode.Open);
 			BinaryFormatter bFormatter = new BinaryFormatter();
 			character = (Character)bFormatter.Deserialize(stream);
 			stream.Close();
 			return character;
         }
-
 		public void Save(string filename, Character character)
 		{
-			Stream stream = File.Open(filename, FileMode.Create);
+			createdir ();
+			Console.WriteLine (path);
+			Stream stream = File.Open(path + filename, FileMode.Create);
 			BinaryFormatter bFormatter = new BinaryFormatter();
 			bFormatter.Serialize(stream, character);
 			stream.Close();
 		}
+		//Returns a list of files in the current directory (by default the program directory)
 		public string Files()
 		{
-			string path = Directory.GetCurrentDirectory ();
+			createdir ();
 			string[] files = Directory.GetFiles (path, "*.char");
 			string files2 = "";
 			foreach (string j in files)
