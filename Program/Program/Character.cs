@@ -23,7 +23,9 @@ namespace Program
 
     ;
 
+	//serializable so we can save to a file
 	[Serializable()]
+	//there is a serializable class we need to inherit to send data in and out
 	public class Character : ISerializable
     {
 		//returns data from InOut
@@ -45,6 +47,7 @@ namespace Program
 
 			this.race = (CharacterRace)info.GetValue ("Race", typeof(CharacterRace));
 
+			//show a character sheet after loading because why not?
 			string sheet = charsheet ();
 			Console.WriteLine (sheet);
 			Console.ReadLine ();
@@ -70,15 +73,15 @@ namespace Program
 			info.AddValue ("Race", this.race);
 		}
 
-		//creates a character sheet
+		//creates a character sheet.  By keeping this here it is easier to edit later.
 		public string charsheet()
 		{
 			string sheet = string.Format("STR: {0} DEX: {1} CON: {2}\n" +
 				"INT: {3} WIS: {4} INT: {5}\n" +
 				"Race: {6}", 
-				strength, dexterity, constitution, 
-				intelligence, wisdom, charisma, 
-				race)
+				this.strength, this.dexterity, this.constitution, 
+				this.intelligence, this.wisdom, this.charisma, 
+				this.race)
 			;
 			return sheet;
 		}
@@ -92,7 +95,9 @@ namespace Program
         private int INT;
         private int WIS;
         private int CHA;
+		//we can just return the point cost from an array rather than figuring out what the formula whould be.
         private int[] points = { -4, -2, -1, 0, 1, 2, 3, 5, 7, 10, 13, 17 };
+		//this returns a 'never used' warning on compile even though it is totally used.
 		private int pointcost;
         // The get method calculates values then returns without the need for a function call.
         public int strength
@@ -171,6 +176,7 @@ namespace Program
         {
             get
             {
+				//remember that variable that was 'never used'? yeah.
                 return this.pointcost = points[STR - 7] + points[DEX - 7] + points[CON - 7] + points[INT - 7] + points[WIS - 7] + points[CHA - 7];
             }
             set
@@ -248,6 +254,7 @@ namespace Program
 		public int wisRacial;
 		public int chaRacial;
 
+		//reset the racial stat boosts here
 		public void RacialReset()
 		{
 			strRacial = 0;

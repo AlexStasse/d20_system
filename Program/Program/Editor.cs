@@ -4,10 +4,11 @@ namespace Program
 {
     public class Editor
     {
+		private static string editormessage = "";
         public static void editor(Character character)
         {
 			//in case of message for editor screen, character sheet by default
-			string editormessage = character.charsheet();
+			Editor.editormessage = character.charsheet();
             bool select = true;
             while(select == true)
             {
@@ -22,7 +23,7 @@ namespace Program
        	        	"(D)escription\n" +
 					"Sa(v)e\n" +
 					"(B)ack to main menu\n\n" +
-					editormessage + "\n");
+					Editor.editormessage + "\n");
 
                 /*This is a series of menus which should call methods in the charEdit class to read/write variables and do calculations
                  * while all the menu functionality should be kept here*/
@@ -63,36 +64,43 @@ namespace Program
 		{
 			InOut S = new InOut ();
 			string filename = "";
+			string files = S.Files ();
 			bool save = true;
 			while (save == true)
 			{
 				Console.Clear ();
-				Console.WriteLine ("Existing Files:\n" + S.Files() +"\n");
+				//Writes existing files so user knows if the file already exists
+				Console.WriteLine ("Existing Files:\n" + files +"\n");
 				Console.WriteLine ("Insert Filename");
 				filename = Console.ReadLine ();
+				//checks if no filename was entered
 				if (filename == "")
 				{
+					//has a whinge about it and doesn't exit the loop
 					Console.WriteLine ("Must enter a filename!");
 				} 
 				else
 				{
-					string files = S.Files ();
 					//check if the file already exists in case of accidental duplicates
 					if (files.Contains (filename))
 					{
 						bool confirm = true;
 						while (confirm == true)
 						{
+							//oh noes! file exists, what will our brave hero do?
 							Console.WriteLine ("Character File Exists! Overwrite? (Y/N)");
 							confirm = false;
 							switch (Console.ReadLine ().ToUpper ())
 							{
 							case "Y":
+								//ironically, save = false really means save = true.  LEAVE THE SAVE LOOP
 								save = false;
 								break;
 							case "N":
+								//let's try a different name then shall we, go back to the save loop
 								break;
 							default:
+								//shit I dunno, I'll just hang out in the confirm loop forever I guess
 								confirm = true;
 								break;
 							}
@@ -100,11 +108,22 @@ namespace Program
 					}
 				}
 			}
+			//append the filetype and save, hooray!
 			filename = filename + ".char";
 			S.Save (filename, character);
 		}
         //-------------------------------------------------------------------------------------------------------------------------------------------
-        public static void Abilities(Character character)
+		//calculates a new value for ability scores since doing it seperately for every single one was retarded
+		public static int newval()
+		{
+			int newval;
+			int.TryParse(Console.ReadLine(), out newval);
+			newval = newval < 7 ? 7 : newval;
+			newval = newval > 18 ? 18 : newval;
+			return newval;
+		}
+		//menu to change ability scores!
+		public static void Abilities(Character character)
         {
             bool abchange = true;
             while(abchange == true)
@@ -129,47 +148,32 @@ namespace Program
 
 				Console.WriteLine("Change which Ability? Or go (B)ack.");
                 string select = Console.ReadLine().ToUpper();
+				/*This is assuming character creation, levelling up and temp stats is handled seperately to this so it's all good
+				 * OTOH if you fuck with this after a few levels you may screw yourself*/
                 Console.WriteLine("New Value(7 to 18):");
                 switch(select)
                 {
                     case "S":
-                        int newval = 0;
-                        int.TryParse(Console.ReadLine(), out newval);
-                        newval = newval < 7 ? 7 : newval;
-                        newval = newval > 18 ? 18 : newval;
-                        character.strength = newval;
+						character.strength = newval();
                         break;
                     case "D":
-                        int.TryParse(Console.ReadLine(), out newval);
-                        newval = newval < 7 ? 7 : newval;
-                        newval = newval > 18 ? 18 : newval;
-                        character.dexterity = newval;
+						character.dexterity = newval();
                         break;
                     case "C":
-                        int.TryParse(Console.ReadLine(), out newval);
-                        newval = newval < 7 ? 7 : newval;
-                        newval = newval > 18 ? 18 : newval;
-                        character.constitution = newval;
+						character.constitution = newval();
                         break;
                     case "I":
-                        int.TryParse(Console.ReadLine(), out newval);
-                        newval = newval < 7 ? 7 : newval;
-                        newval = newval > 18 ? 18 : newval;
-                        character.intelligence = newval;
+						character.intelligence = newval();
                         break;
                     case "W":
-                        int.TryParse(Console.ReadLine(), out newval);
-                        newval = newval < 7 ? 7 : newval;
-                        newval = newval > 18 ? 18 : newval;
-                        character.wisdom = newval;
+						character.wisdom = newval();
                         break;
                     case "R":
-                        int.TryParse(Console.ReadLine(), out newval);
-                        newval = newval < 7 ? 7 : newval;
-                        newval = newval > 18 ? 18 : newval;
-                        character.charisma = newval;
+						character.charisma = newval();
                         break;
                     case "B":
+						//gonna have to update this!
+						Editor.editormessage = character.charsheet();
                         abchange = false;
                         break;
                 }
@@ -192,6 +196,7 @@ namespace Program
                 "7) Human\t +2 to one ability score of your choice\n" +
                 "B)ack", character.race);
 
+				//choose a race, for halfelf, halforc and human we get to choose a stat up
                 switch(Console.ReadLine().ToUpper())
                 {
                     case "1":
@@ -229,6 +234,7 @@ namespace Program
             }
         }
 
+		//this is where we choose a stat up!
         public static void StatChoice(Character character)
         {
 			character.RacialReset ();
@@ -260,6 +266,7 @@ namespace Program
                         character.chaRacial = 2;
                         break;
                     default:
+						//no choice made, stay in the loop
                         statselect = true;
                         break;
                 }
