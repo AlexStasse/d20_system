@@ -184,12 +184,7 @@ namespace Program
 
         public static void StatChoice(Character character)
         {
-			character.strRacial = 0;
-			character.dexRacial = 0;
-			character.conRacial = 0;
-			character.intRacial = 0;
-			character.wisRacial = 0;
-			character.chaRacial = 0;
+			character.RacialReset ();
             Console.WriteLine("Choose an Ability Score to increase by 2 points:\n" +
 				"(S)trength, (D)exterity, (C)onstitution, (I)ntelligence, (W)isdom, Cha(r)isma");
             string select = Console.ReadLine().ToUpper();
@@ -200,22 +195,22 @@ namespace Program
                 switch(select)
                 {
                     case "S":
-                        character.strRacial += 2;
+                        character.strRacial = 2;
                         break;
                     case "D":
-                        character.dexRacial += 2;
+                        character.dexRacial = 2;
                         break;
                     case "C":
-                        character.conRacial += 2;
+                        character.conRacial = 2;
                         break;
                     case "I":
-                        character.intRacial += 2;
+                        character.intRacial = 2;
                         break;
                     case "W":
-                        character.wisRacial += 2;
+                        character.wisRacial = 2;
                         break;
                     case "R":
-                        character.chaRacial += 2;
+                        character.chaRacial = 2;
                         break;
                     default:
                         statselect = true;

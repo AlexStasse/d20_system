@@ -35,9 +35,23 @@ namespace Program
 			this.WIS = (int)info.GetValue("Wisdom", typeof(int));
 			this.CHA = (int)info.GetValue("Charisma", typeof(int));
 
+			this.strRacial = (int)info.GetValue("Racial Strength", typeof(int));
+			this.dexRacial = (int)info.GetValue("Racial Dexterity", typeof(int));
+			this.conRacial = (int)info.GetValue("Racial Constitution", typeof(int));
+			this.intRacial = (int)info.GetValue("Racial Intelligence", typeof(int));
+			this.wisRacial = (int)info.GetValue("Racial Wisdom", typeof(int));
+			this.chaRacial = (int)info.GetValue("Racial Charisma", typeof(int));
+
 			this.race = (CharacterRace)info.GetValue ("Race", typeof(CharacterRace));
 
-			Console.WriteLine ("{0}, {1}, {2}, {3}, {4}, {5}, {6}", this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA, this.race);
+			Console.WriteLine (
+				"STR: {0} DEX: {1} CON: {2}\n" +
+				"INT: {3} WIS: {4} INT: {5}\n" +
+				"Race: {6}", 
+				this.STR + strRacial, this.DEX + dexRacial, this.CON + conRacial, 
+				this.INT + intRacial, this.WIS + wisRacial, this.CHA + chaRacial, 
+				this.race
+			);
 			Console.ReadLine ();
 		}
 
@@ -50,10 +64,14 @@ namespace Program
 			info.AddValue ("Wisdom", this.WIS);
 			info.AddValue ("Charisma", this.CHA);
 
-			info.AddValue ("Race", this.race);
+			info.AddValue ("Racial Strength", this.strRacial);
+			info.AddValue ("Racial Dexterity", this.dexRacial);
+			info.AddValue ("Racial Constitution", this.conRacial);
+			info.AddValue ("Racial Intelligence", this.intRacial);
+			info.AddValue ("Racial Wisdom", this.wisRacial);
+			info.AddValue ("Racial Charisma", this.chaRacial);
 
-			Console.WriteLine ("{0}, {1}, {2}, {3}, {4}, {5}, {6}", this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA, this.race);
-			Console.ReadLine ();
+			info.AddValue ("Race", this.race);
 		}
 
         #region Character Stats
@@ -221,40 +239,42 @@ namespace Program
 		public int wisRacial;
 		public int chaRacial;
 
+		public void RacialReset()
+		{
+			strRacial = 0;
+			dexRacial = 0;
+			conRacial = 0;
+			intRacial = 0;
+			wisRacial = 0;
+			chaRacial = 0;
+		}
+
         public void RaceStatMod()
         {
             switch(race)
             {
 			case CharacterRace.Dwarf:
-					strRacial = 0;
-					dexRacial = 0;
+					RacialReset ();
 					conRacial = 2;
-					intRacial = 0;
                     wisRacial = 2;
 					chaRacial = -2;
                     break;
                 case CharacterRace.Elf:
-					strRacial = 0;
+					RacialReset ();
 					dexRacial = 2;
 					conRacial = -2;
 					intRacial = 2;
-					wisRacial = 0;
-					chaRacial = 0;
                     break;
                 case CharacterRace.Gnome:
+					RacialReset ();
 					strRacial = -2;
-					dexRacial = 0;
 					conRacial = 2;
-					intRacial = 0;
-					wisRacial = 0;
 					chaRacial = 2;
                     break;
                 case CharacterRace.Halfling:
+					RacialReset ();
 					strRacial = -2;
 					dexRacial = 2;
-					conRacial = 0;
-					intRacial = 0;
-					wisRacial = 0;
 					chaRacial = 2;
                     break;
                 default:
