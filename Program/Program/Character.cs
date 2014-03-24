@@ -5,6 +5,9 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Program
 {
@@ -20,9 +23,21 @@ namespace Program
 
     ;
 
-    [SerializableAttribute]
-    public class Character
+	[Serializable()]
+	public class Character : ISerializable
     {
+		public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+		{
+			info.AddValue ("Strength", this.STR);
+			info.AddValue ("Dexterity", this.DEX);
+			info.AddValue ("Constitution", this.CON);
+			info.AddValue ("Intelligence", this.INT);
+			info.AddValue ("Wisdom", this.WIS);
+			info.AddValue ("Charisma", this.CHA);
+
+			info.AddValue ("Race", this.race);
+		}
+
         #region Character Stats
 
         // Character stats. Using capitals because 'int' is a keyword.
@@ -33,7 +48,7 @@ namespace Program
         private int WIS;
         private int CHA;
         private int[] points = { -4, -2, -1, 0, 1, 2, 3, 5, 7, 10, 13, 17 };
-        private int pointcost;
+		private int pointcost;
         // The get method calculates values then returns without the need for a function call.
         public int strength
         {

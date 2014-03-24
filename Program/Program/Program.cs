@@ -21,13 +21,10 @@ namespace Program
 					switch(Console.ReadLine().ToUpper())
 					{
 					case "L": //Selected Load
-						InOut L = new InOut();
-						L.Load();
-						break;
-					case "S": //Selected Save
-						InOut S = new InOut();
-						S.Save();
-						break;
+						InOut L = new InOut ();
+						Console.WriteLine ("Insert Filename");
+						string filename = Console.ReadLine () + ".char";
+						L.Load(filename);
                     case "C": //Selected Create
 						//newChar creates all the empty variables needed for a new character
                             Character character = new Character();

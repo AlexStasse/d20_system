@@ -17,6 +17,7 @@ namespace Program
                 "(S)kills\n" +
                 "(F)eats\n" +
                 "(D)escription\n" +
+				"Sa(v)e\n" +
                 "(B)ack to main menu");
 
                 /*This is a series of menus which should call methods in the charEdit class to read/write variables and do calculations
@@ -44,6 +45,12 @@ namespace Program
                     case "B":
                         select = false;
                         break;
+					case "V": //Selected Save
+						InOut S = new InOut ();
+						Console.WriteLine ("Insert Filename");
+						string filename = Console.ReadLine () + ".char";
+						S.Save(filename, character);
+						break;
                     default:
                         break;
                 }
