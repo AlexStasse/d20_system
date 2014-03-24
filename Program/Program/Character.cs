@@ -36,6 +36,9 @@ namespace Program
 			this.CHA = (int)info.GetValue("Charisma", typeof(int));
 
 			this.race = (CharacterRace)info.GetValue ("Race", typeof(CharacterRace));
+
+			Console.WriteLine ("{0}, {1}, {2}, {3}, {4}, {5}, {6}", this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA, this.race);
+			Console.ReadLine ();
 		}
 
 		public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
@@ -48,6 +51,9 @@ namespace Program
 			info.AddValue ("Charisma", this.CHA);
 
 			info.AddValue ("Race", this.race);
+
+			Console.WriteLine ("{0}, {1}, {2}, {3}, {4}, {5}, {6}", this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA, this.race);
+			Console.ReadLine ();
 		}
 
         #region Character Stats
