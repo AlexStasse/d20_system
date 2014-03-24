@@ -6,19 +6,23 @@ namespace Program
     {
         public static void editor(Character character)
         {
+			//in case of message for editor screen, character sheet by default
+			string editormessage = character.charsheet();
             bool select = true;
             while(select == true)
             {
+				//Editor menu starts here
                 Console.Clear();
                 Console.WriteLine("Character Editor\nSelect what you would like to change\n\n" +
-                "(A)bilities\n" +
-                "(R)ace\n" +
-                "(C)lass\n" +
-                "(S)kills\n" +
-                "(F)eats\n" +
-                "(D)escription\n" +
-				"Sa(v)e\n" +
-                "(B)ack to main menu");
+               		"(A)bilities\n" +
+               		"(R)ace\n" +
+    	           	"(C)lass\n" +
+       	        	"(S)kills\n" +
+       	        	"(F)eats\n" +
+       	        	"(D)escription\n" +
+					"Sa(v)e\n" +
+					"(B)ack to main menu\n\n" +
+					editormessage + "\n");
 
                 /*This is a series of menus which should call methods in the charEdit class to read/write variables and do calculations
                  * while all the menu functionality should be kept here*/
@@ -43,9 +47,11 @@ namespace Program
                         character.Description();
                         break;
                     case "B":
+					/*ends the select menu loop, effectively sending you back to the main menu
+					 * the returnmessage(charsheet) is defined in Program, ensuring you always see it no matter how you return*/
                         select = false;
                         break;
-					case "V": //Selected Save
+					case "V": 
 					savemenu (character);
 						break;
                     default:
@@ -55,36 +61,47 @@ namespace Program
         }
 		public static void savemenu(Character character)
 		{
+			InOut S = new InOut ();
+			string filename = "";
 			bool save = true;
 			while (save == true)
 			{
-				save = false;
-				InOut S = new InOut ();
+				Console.Clear ();
+				Console.WriteLine ("Existing Files:\n" + S.Files() +"\n");
 				Console.WriteLine ("Insert Filename");
-				string filename = Console.ReadLine () + ".char";
-				string files = S.Files();
-				if (files.Contains (filename))
+				filename = Console.ReadLine ();
+				if (filename == "")
 				{
-					Console.WriteLine ("Character File Exists! Overwrite? (Y/N)");
-					bool confirm = true;
-					while (confirm == true)
+					Console.WriteLine ("Must enter a filename!");
+				} 
+				else
+				{
+					string files = S.Files ();
+					//check if the file already exists in case of accidental duplicates
+					if (files.Contains (filename))
 					{
-						confirm = false;
-						switch (Console.ReadLine ())
+						bool confirm = true;
+						while (confirm == true)
 						{
-						case "Y":
-							break;
-						case "N":
-							save = true;
-							break;
-						default:
-							confirm = true;
-							break;
+							Console.WriteLine ("Character File Exists! Overwrite? (Y/N)");
+							confirm = false;
+							switch (Console.ReadLine ().ToUpper ())
+							{
+							case "Y":
+								save = false;
+								break;
+							case "N":
+								break;
+							default:
+								confirm = true;
+								break;
+							}
 						}
 					}
 				}
-				S.Save (filename, character);
 			}
+			filename = filename + ".char";
+			S.Save (filename, character);
 		}
         //-------------------------------------------------------------------------------------------------------------------------------------------
         public static void Abilities(Character character)
