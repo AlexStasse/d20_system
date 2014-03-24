@@ -33,18 +33,22 @@ namespace Program
 							try
 							{
 								character = L.Load (filename);
+								loading = false;
+								Editor.editor(character);
 							} 
 							catch (System.IO.FileNotFoundException)
 							{
 								Console.WriteLine ("File not found! (B)ack to main menu or try again");
-								switch (Console.ReadLine ().ToUpper ())
+								string response = Console.ReadLine ();
+								switch (response)
 								{
+								case "b":
 								case "B":
-									select = true;
 									loading = false;
+									select = true;
 									break;
 								default:
-									filename = Console.ReadLine () + ".char";
+									filename = response;
 									break;
 								}
 							}

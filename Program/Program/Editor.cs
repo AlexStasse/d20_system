@@ -64,6 +64,7 @@ namespace Program
 				string filename = Console.ReadLine () + ".char";
 				string files = S.Files();
 				if (files.Contains (filename))
+				{
 					Console.WriteLine ("Character File Exists! Overwrite? (Y/N)");
 					bool confirm = true;
 					while (confirm == true)
@@ -81,6 +82,7 @@ namespace Program
 							break;
 						}
 					}
+				}
 				S.Save (filename, character);
 			}
 		}

@@ -12,7 +12,9 @@ namespace Program
 
 		public void createdir()
 		{
-			DirectoryInfo d = Directory.CreateDirectory(path);
+			Directory.CreateDirectory(path);
+			var di = new DirectoryInfo(path);
+			di.Attributes &= ~FileAttributes.ReadOnly;
 		}
 
 		public Character Load(string filename)
@@ -41,7 +43,7 @@ namespace Program
 			string files2 = "";
 			foreach (string j in files)
 			{
-				string k = j.Replace (path + "\\", "");
+				string k = j.Replace (path, "");
 				k = k.Replace (".char", "");
 				files2 += "\n" + k;
 			}
