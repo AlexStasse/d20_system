@@ -39,7 +39,7 @@ namespace Program
         {
             get
             {
-                return this.STR + this.strAlter;
+				return this.STR + this.strAlter + this.strRacial;
             }
             set
             {
@@ -51,7 +51,7 @@ namespace Program
         {
             get
             {
-                return this.DEX + this.dexAlter;
+				return this.DEX + this.dexAlter + this.dexRacial;
             }
             set
             {
@@ -63,7 +63,7 @@ namespace Program
         {
             get
             {
-                return this.CON + this.conAlter;
+				return this.CON + this.conAlter + this.conRacial;
             }
             set
             {
@@ -75,7 +75,7 @@ namespace Program
         {
             get
             {
-                return this.INT + this.intAlter;
+				return this.INT + this.intAlter + this.intRacial;
             }
             set
             {
@@ -87,7 +87,7 @@ namespace Program
         {
             get
             {
-                return this.WIS + this.wisAlter;
+				return this.WIS + this.wisAlter + this.wisRacial;
             }
             set
             {
@@ -99,7 +99,7 @@ namespace Program
         {
             get
             {
-                return this.CHA + this.chaAlter;
+				return this.CHA + this.chaAlter + this.chaRacial;
             }
             set
             {
@@ -180,29 +180,49 @@ namespace Program
 
         public CharacterRace race;
 
+		// Racial stat changes
+		public int strRacial;
+		public int dexRacial;
+		public int conRacial;
+		public int intRacial;
+		public int wisRacial;
+		public int chaRacial;
+
         public void RaceStatMod()
         {
             switch(race)
             {
-                case CharacterRace.Dwarf:
-                    conAlter += 2;
-                    wisAlter += 2;
-                    chaAlter -= 2;
+			case CharacterRace.Dwarf:
+					strRacial = 0;
+					dexRacial = 0;
+					conRacial = 2;
+					intRacial = 0;
+                    wisRacial = 2;
+					chaRacial = -2;
                     break;
                 case CharacterRace.Elf:
-                    dexAlter += 2;
-                    intAlter += 2;
-                    conAlter -= 2;
+					strRacial = 0;
+					dexRacial = 2;
+					conRacial = -2;
+					intRacial = 2;
+					wisRacial = 0;
+					chaRacial = 0;
                     break;
                 case CharacterRace.Gnome:
-                    conAlter += 2;
-                    chaAlter += 2;
-                    strAlter -= 2;
+					strRacial = -2;
+					dexRacial = 0;
+					conRacial = 2;
+					intRacial = 0;
+					wisRacial = 0;
+					chaRacial = 2;
                     break;
                 case CharacterRace.Halfling:
-                    dexAlter += 2;
-                    chaAlter += 2;
-                    strAlter -= 2;
+					strRacial = -2;
+					dexRacial = 2;
+					conRacial = 0;
+					intRacial = 0;
+					wisRacial = 0;
+					chaRacial = 2;
                     break;
                 default:
                     break;
@@ -233,6 +253,14 @@ namespace Program
             this.intAlter = alterDefault;
             this.wisAlter = alterDefault;
             this.chaAlter = alterDefault;
+
+			// Racial Ability Alter Defauling.
+			this.strRacial = alterDefault;
+			this.dexRacial = alterDefault;
+			this.conRacial = alterDefault;
+			this.intRacial = alterDefault;
+			this.wisRacial = alterDefault;
+			this.chaRacial = alterDefault;
 
             // Default to human.
             this.race = CharacterRace.Human;

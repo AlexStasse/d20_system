@@ -62,7 +62,7 @@ namespace Program
                     "15: Standard Fantasy\n" +
                     "20: High Fantasy\n" +
                     "25: Epic Fantasy\n\n" +
-                    "  Ability:\t Score\t Modifier\n" +
+                    "  Ability\t Score\t Modifier\n" +
                     "(S)trength:\t   {0} \t    {6}\n" +
                     "(D)exterity:\t   {1} \t    {7}\n" +
                     "(C)onstitution:\t   {2} \t    {8}\n" +
@@ -73,7 +73,7 @@ namespace Program
                     character.charisma, character.strMod, character.dexMod, character.conMod, character.intMod, character.wisMod,
                     character.chaMod, character.pointvalue);
 
-                Console.WriteLine("Change which Ability? Or go(B)ack.");
+				Console.WriteLine("Change which Ability? Or go (B)ack.");
                 string select = Console.ReadLine().ToUpper();
                 Console.WriteLine("New Value(7 to 18):");
                 switch(select)
@@ -177,8 +177,14 @@ namespace Program
 
         public static void StatChoice(Character character)
         {
+			character.strRacial = 0;
+			character.dexRacial = 0;
+			character.conRacial = 0;
+			character.intRacial = 0;
+			character.wisRacial = 0;
+			character.chaRacial = 0;
             Console.WriteLine("Choose an Ability Score to increase by 2 points:\n" +
-            "(S)trength, (D)exterity, (C)onstitution, (I)ntelligence, (W)isdom, (C)harisma");
+				"(S)trength, (D)exterity, (C)onstitution, (I)ntelligence, (W)isdom, Cha(r)isma");
             string select = Console.ReadLine().ToUpper();
             bool statselect = true;
             while(statselect == true)
@@ -187,22 +193,22 @@ namespace Program
                 switch(select)
                 {
                     case "S":
-                        character.strAlter += 2;
+                        character.strRacial += 2;
                         break;
                     case "D":
-                        character.dexAlter += 2;
+                        character.dexRacial += 2;
                         break;
                     case "C":
-                        character.conAlter += 2;
+                        character.conRacial += 2;
                         break;
                     case "I":
-                        character.intAlter += 2;
+                        character.intRacial += 2;
                         break;
                     case "W":
-                        character.wisAlter += 2;
+                        character.wisRacial += 2;
                         break;
                     case "R":
-                        character.chaAlter += 2;
+                        character.chaRacial += 2;
                         break;
                     default:
                         statselect = true;
