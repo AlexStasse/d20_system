@@ -8,6 +8,7 @@ namespace Program
 		//C# programs always start from the Main method
 		public static void Main(string[] args)
 		{
+			string returnmessage = "";
 			while(true) 
 			{
 				Character character = new Character();
@@ -16,48 +17,62 @@ namespace Program
 				{
 					Console.Clear ();
 					Console.WriteLine("Welcome to the character manager\n" +
-					"(L)oad or (C)reate new character");
+						"(L)oad or (C)reate new character\n" +
+						returnmessage);
 					select = false;
 					switch(Console.ReadLine().ToUpper())
 					{
 					case "L": //Selected Load
 						InOut L = new InOut ();
-						Console.Clear ();
-						Console.WriteLine ("Select Character to load:");
 						string files = L.Files ();
-						Console.WriteLine (files);
-						string filename = Console.ReadLine () + ".char";
-						bool loading = true;
-						while (loading == true)
+						if (files == "")
 						{
-							try
+							returnmessage = "No Files Exist!";
+						} 
+						else
+						{
+							Console.Clear ();
+							Console.WriteLine ("Select Character to load:");
+							Console.WriteLine (files);
+							string filename = Console.ReadLine () + ".char";
+							bool loading = true;
+							if (filename == ".char")
 							{
-								character = L.Load (filename);
 								loading = false;
-								Editor.editor(character);
-							} 
-							catch (System.IO.FileNotFoundException)
+								returnmessage = "No File Selected";
+							}
+							while (loading == true)
 							{
-								Console.WriteLine ("File not found! (B)ack to main menu or try again");
-								string response = Console.ReadLine ();
-								switch (response)
+								try
 								{
-								case "b":
-								case "B":
+									character = L.Load (filename);
 									loading = false;
-									select = true;
-									break;
-								default:
-									filename = response;
-									break;
+									Editor.editor(character);
+								} 
+								catch (System.IO.FileNotFoundException)
+								{
+									Console.WriteLine ("File not found! (B)ack to main menu or try again");
+									string response = Console.ReadLine ();
+									switch (response)
+									{
+									case "b":
+									case "B":
+										loading = false;
+										select = true;
+										break;
+									default:
+										filename = response;
+										break;
+									}
 								}
 							}
 						}
 						break;
-                    case "C": //Selected Create
+					case "C": //Selected Create
 						//newChar creates all the empty variables needed for a new character
-                        Console.WriteLine(character.strength);
-                        Editor.editor(character);
+						Console.WriteLine (character.strength);
+						Editor.editor (character);
+						returnmessage = character.charsheet ();
 						break;
 					default: //nothing selected, go to start of loop
 						select = true;

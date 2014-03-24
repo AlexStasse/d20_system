@@ -26,6 +26,7 @@ namespace Program
 	[Serializable()]
 	public class Character : ISerializable
     {
+		//returns data from InOut
 		public Character(SerializationInfo info, StreamingContext ctxt)
 		{
 			this.STR = (int)info.GetValue("Strength", typeof(int));
@@ -44,17 +45,12 @@ namespace Program
 
 			this.race = (CharacterRace)info.GetValue ("Race", typeof(CharacterRace));
 
-			Console.WriteLine (
-				"STR: {0} DEX: {1} CON: {2}\n" +
-				"INT: {3} WIS: {4} INT: {5}\n" +
-				"Race: {6}", 
-				this.STR + strRacial, this.DEX + dexRacial, this.CON + conRacial, 
-				this.INT + intRacial, this.WIS + wisRacial, this.CHA + chaRacial, 
-				this.race
-			);
+			string sheet = charsheet ();
+			Console.WriteLine (sheet);
 			Console.ReadLine ();
 		}
 
+		//sends data to InOut
 		public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
 		{
 			info.AddValue ("Strength", this.STR);
@@ -72,6 +68,19 @@ namespace Program
 			info.AddValue ("Racial Charisma", this.chaRacial);
 
 			info.AddValue ("Race", this.race);
+		}
+
+		//creates a character sheet
+		public string charsheet()
+		{
+			string sheet = string.Format("STR: {0} DEX: {1} CON: {2}\n" +
+				"INT: {3} WIS: {4} INT: {5}\n" +
+				"Race: {6}", 
+				strength, dexterity, constitution, 
+				intelligence, wisdom, charisma, 
+				race)
+			;
+			return sheet;
 		}
 
         #region Character Stats

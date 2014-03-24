@@ -10,6 +10,7 @@ namespace Program
     {
 		public string path = Directory.GetCurrentDirectory () + "\\characters\\";
 
+
 		public void createdir()
 		{
 			Directory.CreateDirectory(path);
@@ -19,6 +20,7 @@ namespace Program
 
 		public Character Load(string filename)
         {
+			createdir ();
 			Character character = new Character();
 			Stream stream = File.Open(path + filename, FileMode.Open);
 			BinaryFormatter bFormatter = new BinaryFormatter();
