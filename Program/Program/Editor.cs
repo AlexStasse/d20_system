@@ -45,7 +45,7 @@ namespace Program
                         character.Feats();
                         break;
                     case "D":
-                        character.Description();
+						Description(character);
                         break;
                     case "B":
 					/*ends the select menu loop, effectively sending you back to the main menu
@@ -272,6 +272,93 @@ namespace Program
                 }
             }
         }
+
+		public static void Description(Character character)
+		{
+			bool describing = true;
+			while (describing == true)
+			{
+				Console.Clear ();
+				Console.WriteLine(character.description);
+				Console.WriteLine ("\nChange:\n" +
+				"(N)ame\n" +
+				"(A)ge\n" +
+				"(H)eight\n" +
+				"(W)eight\n" +
+				"(E)yes\n" +
+				"Hai(r)\n" +
+				"(G)ood - Evil Alignment\n" +
+				"(L)awful - Chaotic alignment\n" +
+				"(B)ack");
+
+				switch(Console.ReadLine().ToUpper())
+				{
+				case "N":
+					Console.WriteLine ("Enter a new name");
+					character.name = Console.ReadLine ();
+					break;
+				case "A":
+					Console.WriteLine ("Enter a new Age");
+					int age;
+					int.TryParse (Console.ReadLine (), out age);
+					character.age = age;
+					break;
+				case "H":
+					int height;
+					Console.WriteLine ("Enter a new Height (cm)");
+					int.TryParse (Console.ReadLine (), out height);
+					character.height = height;
+					break;
+				case "W":
+					int weight;
+					Console.WriteLine ("Enter a new Weight (kg)");
+					int.TryParse (Console.ReadLine (), out weight);
+					character.weight = weight;
+					break;
+				case "E":
+					Console.WriteLine ("Enter a new Eye Description");
+					character.eyes = Console.ReadLine ();
+					break;
+				case "R":
+					Console.WriteLine ("Enter a new Hair Description");
+					character.hair = Console.ReadLine ();
+					break;
+				case "G":
+					Console.WriteLine ("Select (G)ood, (N)eutral or (E)vil");
+					switch (Console.ReadLine ().ToUpper ())
+					{
+					case "G":
+						character.ge_align = Character.GE_Align.Good;
+						break;
+					case "N":
+						character.ge_align = Character.GE_Align.Neutral;
+						break;
+					case "E":
+						character.ge_align = Character.GE_Align.Evil;
+						break;
+					}
+					break;
+				case "L":
+					Console.WriteLine ("Select (L)awful, (N)eutral or (C)haotic");
+					switch (Console.ReadLine ().ToUpper ())
+					{
+					case "G":
+						character.lc_align = Character.LC_Align.Lawful;
+						break;
+					case "N":
+						character.lc_align = Character.LC_Align.Neutral;
+						break;
+					case "C":
+						character.lc_align = Character.LC_Align.Chaotic;
+						break;
+					}
+					break;
+				case "B":
+					describing = false;
+					break;
+				}
+			}
+		}
     }
 }
 

@@ -92,56 +92,68 @@ namespace Program
 		}
 
 		//creates a character sheet.  By keeping this here it is easier to edit later.
+
+		public string DESCRIPTION;
+		public string description {
+			get
+			{
+				string align;
+				string lc = "";
+				string ge = "";
+				switch (lc_align)
+				{
+				case LC_Align.Chaotic:
+					lc = "Chaotic";
+					break;
+				case LC_Align.Lawful:
+					lc = "Lawful";
+					break;
+				case LC_Align.Neutral:
+					lc = "Neutral";
+					break;
+				}
+				switch (ge_align)
+				{
+				case GE_Align.Evil:
+					ge = "Evil";
+					break;
+				case GE_Align.Good:
+					ge = "Good";
+					break;
+				case GE_Align.Neutral:
+					ge = "Neutral";
+					break;
+				}
+
+				if (lc == "Neutral" && ge == "Neutral")
+				{
+					align = "Alignment: True Neutral";
+				} else
+				{
+					align = string.Format ("Alignment: {0} {1}", lc, ge);
+				}
+
+				string description = string.Format ("Name: {0} " + align +
+					"\nAge: {1} years, Height: {2}cm, Weight: {3}kg\n" +
+				                    "Eyes: {4}, Hair: {5}",
+					                    this.name, this.age, this.height, this.weight, 
+					                    this.eyes, this.hair);
+
+				return description;
+			}
+		}
+
 		public string charsheet()
 		{
-			string description = string.Format("Name: {0}" +
-				"Age: {1}, Height: {2}, Weight: {3}\n" +
-				"Eyes: {4}, Hair: {5}",
-				this.name, this.age, this.height, this.weight, 
-				this.eyes, this.hair);
+			string description = this.description;
 
 			string attributes = string.Format ("STR: {0} DEX: {1} CON: {2}\n" +
                 "INT: {3} WIS: {4} INT: {5}",
                  this.strength, this.dexterity, this.constitution, 
                  this.intelligence, this.wisdom, this.charisma);
 				
-			string align;
-			string lc = "";
-			string ge = "";
-			switch (lc_align)
-			{
-			case LC_Align.Chaotic:
-				lc = "Chaotic";
-				break;
-			case LC_Align.Lawful:
-				lc = "Lawful";
-				break;
-			case LC_Align.Neutral:
-				lc = "Neutral";
-				break;
-			}
-			switch (ge_align)
-			{
-			case GE_Align.Evil:
-				ge = "Evil";
-				break;
-			case GE_Align.Good:
-				ge = "Good";
-				break;
-			case GE_Align.Neutral:
-				ge = "Neutral";
-				break;
-			}
 
-			if (lc == "Neutral" && ge == "Neutral")
-			{
-				align = "Alignment: True Neutral";
-			} else
-			{
-				align = "Alignment: " + lc + " " + ge;
-			}
-
-			string sheet = description + "\t" + align + "\n" + attributes;
+			string sheet = description + "\n" + attributes;
 
 			return sheet;
 		}
