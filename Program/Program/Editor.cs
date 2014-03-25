@@ -273,6 +273,27 @@ namespace Program
             }
         }
 
+		public static int DescriptorChoice(string descriptor_string, string units)
+		{
+			int result = 0;
+			bool repeat = true;
+			while (repeat == true)
+			{
+				repeat = false;
+				Console.WriteLine ("Enter a new {0} in {1}", descriptor_string, units);
+				try
+				{
+					result = int.Parse (Console.ReadLine ());
+				} 
+				catch (FormatException)
+				{
+					Console.WriteLine ("Must be an integer");
+					repeat = true;
+				}
+			}
+			return result;
+		}
+
 		public static void Description(Character character)
 		{
 			bool describing = true;
@@ -298,22 +319,13 @@ namespace Program
 					character.name = Console.ReadLine ();
 					break;
 				case "A":
-					Console.WriteLine ("Enter a new Age");
-					int age;
-					int.TryParse (Console.ReadLine (), out age);
-					character.age = age;
+					character.age = DescriptorChoice ("Age", "Years");
 					break;
 				case "H":
-					int height;
-					Console.WriteLine ("Enter a new Height (cm)");
-					int.TryParse (Console.ReadLine (), out height);
-					character.height = height;
+					character.height = DescriptorChoice ("Height", "cm");
 					break;
 				case "W":
-					int weight;
-					Console.WriteLine ("Enter a new Weight (kg)");
-					int.TryParse (Console.ReadLine (), out weight);
-					character.weight = weight;
+					character.weight = DescriptorChoice ("Weight", "kg");
 					break;
 				case "E":
 					Console.WriteLine ("Enter a new Eye Description");
@@ -342,7 +354,7 @@ namespace Program
 					Console.WriteLine ("Select (L)awful, (N)eutral or (C)haotic");
 					switch (Console.ReadLine ().ToUpper ())
 					{
-					case "G":
+					case "L":
 						character.lc_align = Character.LC_Align.Lawful;
 						break;
 					case "N":
