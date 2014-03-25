@@ -47,6 +47,15 @@ namespace Program
 
 			this.race = (CharacterRace)info.GetValue ("Race", typeof(CharacterRace));
 
+			this.NAME = (string)info.GetValue("Name", typeof(string));
+			this.AGE = (int)info.GetValue("Age", typeof(int));
+			this.HEIGHT = (int)info.GetValue("Height", typeof(int));
+			this.WEIGHT = (int)info.GetValue("Weight", typeof(int));
+			this.EYES = (string)info.GetValue("Eyes", typeof(string));
+			this.HAIR = (string)info.GetValue("Hair", typeof(string));
+			this.ge_align = (GE_Align)info.GetValue ("GE_Align", typeof(GE_Align));
+			this.lc_align = (LC_Align)info.GetValue ("LC_Align", typeof(LC_Align));
+
 			//show a character sheet after loading because why not?
 			string sheet = charsheet ();
 			Console.WriteLine (sheet);
@@ -71,18 +80,69 @@ namespace Program
 			info.AddValue ("Racial Charisma", this.chaRacial);
 
 			info.AddValue ("Race", this.race);
+
+			info.AddValue ("Name", this.NAME);
+			info.AddValue ("Age", this.AGE);
+			info.AddValue ("Height", this.HEIGHT);
+			info.AddValue ("Weight", this.WEIGHT);
+			info.AddValue ("Eyes", this.EYES);
+			info.AddValue ("Hair", this.HAIR);
+			info.AddValue ("GE_Align", this.ge_align);
+			info.AddValue ("LC_Align", this.lc_align);
 		}
 
 		//creates a character sheet.  By keeping this here it is easier to edit later.
 		public string charsheet()
 		{
-			string sheet = string.Format("STR: {0} DEX: {1} CON: {2}\n" +
-				"INT: {3} WIS: {4} INT: {5}\n" +
-				"Race: {6}", 
-				this.strength, this.dexterity, this.constitution, 
-				this.intelligence, this.wisdom, this.charisma, 
-				this.race)
-			;
+			string description = string.Format("Name: {0}" +
+				"Age: {1}, Height: {2}, Weight: {3}\n" +
+				"Eyes: {4}, Hair: {5}",
+				this.name, this.age, this.height, this.weight, 
+				this.eyes, this.hair);
+
+			string attributes = string.Format ("STR: {0} DEX: {1} CON: {2}\n" +
+                "INT: {3} WIS: {4} INT: {5}",
+                 this.strength, this.dexterity, this.constitution, 
+                 this.intelligence, this.wisdom, this.charisma);
+				
+			string align;
+			string lc = "";
+			string ge = "";
+			switch (lc_align)
+			{
+			case LC_Align.Chaotic:
+				lc = "Chaotic";
+				break;
+			case LC_Align.Lawful:
+				lc = "Lawful";
+				break;
+			case LC_Align.Neutral:
+				lc = "Neutral";
+				break;
+			}
+			switch (ge_align)
+			{
+			case GE_Align.Evil:
+				ge = "Evil";
+				break;
+			case GE_Align.Good:
+				ge = "Good";
+				break;
+			case GE_Align.Neutral:
+				ge = "Neutral";
+				break;
+			}
+
+			if (lc == "Neutral" && ge == "Neutral")
+			{
+				align = "Alignment: True Neutral";
+			} else
+			{
+				align = "Alignment: " + lc + " " + ge;
+			}
+
+			string sheet = description + "\t" + align + "\n" + attributes;
+
 			return sheet;
 		}
 
@@ -333,6 +393,16 @@ namespace Program
 
             // Default to human.
             this.race = CharacterRace.Human;
+
+			// Default Description
+			this.name = "New Character";
+			this.age = 40;
+			this.height = 170;
+			this.weight = 70;
+			this.eyes = "brown";
+			this.hair = "SPIKY BLONDE";
+			this.ge_align = GE_Align.Neutral;
+			this.lc_align = LC_Align.Neutral;
         }
 
         private int calcStatMod(int stat)
@@ -368,6 +438,105 @@ namespace Program
             Console.WriteLine("Feats");
             Console.ReadLine();
         }
+		#endregion
+
+		#region character description
+
+		public GE_Align ge_align;
+		public LC_Align lc_align;
+		private string NAME;
+		private int AGE;
+		private int HEIGHT;
+		private int WEIGHT;
+		private string EYES;
+		private string HAIR;
+
+
+		public string name
+		{
+			get
+			{
+				return this.NAME;
+			}
+			set
+			{
+				this.NAME = value;
+			}
+		}
+
+		public int age
+		{
+			get
+			{
+				return this.AGE;
+			}
+			set
+			{
+				this.AGE = value;
+			}
+		}
+
+		public int height
+		{
+			get
+			{
+				return this.HEIGHT;
+			}
+			set
+			{
+				this.HEIGHT = value;
+			}
+		}
+
+		public int weight
+		{
+			get
+			{
+				return this.WEIGHT;
+			}
+			set
+			{
+				this.WEIGHT = value;
+			}
+		}
+
+		public string eyes
+		{
+			get
+			{
+				return this.EYES;
+			}
+			set
+			{
+				this.EYES = value;
+			}
+		}
+
+		public string hair
+		{
+			get
+			{
+				return this.HAIR;
+			}
+			set
+			{
+				this.HAIR = value;
+			}
+		}
+
+		public enum GE_Align
+		{
+			Good,
+			Neutral,
+			Evil
+		};
+
+		public enum LC_Align
+		{
+			Lawful,
+			Neutral,
+			Chaotic
+		};
 
         public void Description()
         {

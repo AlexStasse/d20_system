@@ -1,11 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Program\InOut.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Program\Character.cs">
     <Files>
-      <File FileName="Program\Program.cs" Line="1" Column="1" />
-      <File FileName="Program\InOut.cs" Line="23" Column="1" />
-      <File FileName="Program\Editor.cs" Line="1" Column="1" />
-      <File FileName="Program\Character.cs" Line="1" Column="1" />
+      <File FileName="Program\Program.cs" Line="41" Column="59" />
+      <File FileName="Program\InOut.cs" Line="54" Column="42" />
+      <File FileName="Program\Editor.cs" Line="14" Column="14" />
+      <File FileName="Program\Character.cs" Line="349" Column="10" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
