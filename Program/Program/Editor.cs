@@ -35,8 +35,8 @@ namespace Program
                     case "R":
                         Race(character);
                         break;
-                    case "C":
-                        character.Class();
+				case "C":
+					Class (character);
                         break;
                     case "S":
                         character.Skills();
@@ -233,6 +233,118 @@ namespace Program
                 }
             }
         }
+
+		public static void Class(Character character)
+		{
+			bool classchange = true;
+			while (classchange == true)
+			{
+				Console.Clear ();
+				Console.WriteLine ("Choose a Class, currently selected is {0}\n\n" +
+					"1) Barbarian\n" +
+					"2) Bard\n" +
+					"3) Cleric\n" +
+					"4) Druid\n" +
+					"5) Fighter\n" +
+					"6) Monk\n" +
+					"7) Paladin\n" +
+					"8) Ranger\n" +
+					"9) Rogue\n" +
+					"10) Sorceror\n" +
+					"11) Wizard\n" +
+					"B)ack", character.CLASS);
+
+				//choose a race, for halfelf, halforc and human we get to choose a stat up
+				switch (Console.ReadLine ().ToUpper ())
+				{
+				case "1":
+					if (character.lc_align == Character.LC_Align.Lawful)
+					{
+						Console.WriteLine ("Warning! Barbarians must not be Lawful!\n" +
+							"Continue and set alignment to Neutral {0}? Y/N (N Default)", character.ge_align);
+						switch (Console.ReadLine ().ToUpper ())
+						{
+						case "Y":
+							character.Barbarian (character);
+							break;
+						default:
+							break;
+						}
+					} 
+					else
+					{
+						character.Barbarian (character);
+					}
+					break;
+				case "2":
+					character.Bard (character);
+					break;
+				case "3":
+					character.Cleric (character);
+					break;
+				case "4":
+					character.Druid (character);
+					break;
+				case "5":
+					character.Fighter (character);
+					break;
+				case "6":
+					if (character.lc_align != Character.LC_Align.Lawful)
+					{
+						Console.WriteLine ("Warning! Monks must be Lawful!\n" +
+							"Continue and set alignment to Lawful {0}? Y/N (N Default)", character.ge_align);
+						switch (Console.ReadLine ().ToUpper ())
+						{
+						case "Y":
+							character.Monk (character);
+							break;
+						default:
+							break;
+						}
+					} 
+					else
+					{
+						character.Monk (character);
+					}
+					break;
+				case "7":
+					if (character.lc_align != Character.LC_Align.Lawful || character.ge_align != Character.GE_Align.Good)
+					{
+						Console.WriteLine ("Warning! Paladins must be Lawful Good!\n" +
+							"Continue and set alignment to Lawful Good? Y/N (N Default)");
+						switch (Console.ReadLine ().ToUpper ())
+						{
+						case "Y":
+							character.Paladin (character);
+							break;
+						default:
+							break;
+						}
+					} 
+					else
+					{
+						character.Paladin (character);
+					}
+					break;
+				case "8":
+					character.Ranger (character);
+					break;
+				case "9":
+					character.Rogue (character);
+					break;
+				case "10":
+					character.Sorceror (character);
+					break;
+				case "11":
+					character.Wizard (character);
+					break;
+				case "B":
+					Editor.editormessage = character.charsheet();
+					classchange = false;
+					break;
+				}
+			}
+		}
 
 		//this is where we choose a stat up!
         public static void StatChoice(Character character)

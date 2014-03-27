@@ -66,12 +66,12 @@ namespace Program
 			this.CLASS = (CharacterClass)info.GetValue ("Class", typeof(CharacterClass));
 
 			this.HD = (int)info.GetValue ("Hit Dice", typeof(int));
-			this.wealth = (float)info.GetValue("Wealth", typeof(float));
-			this.SkillPoints = (int)info.GetValue ("Skillpoints", typeof(int));
+			this.WEALTH = (float)info.GetValue("Wealth", typeof(float));
+			this.SKILLPOINTS = (int)info.GetValue ("Skillpoints", typeof(int));
 			this.BAB = (int)info.GetValue("BAB", typeof(int));
-			this.fortitude = (int)info.GetValue ("fortitude", typeof(int));
-			this.reflex = (int)info.GetValue ("reflex", typeof(int));
-			this.will = (int)info.GetValue ("will", typeof(int));
+			this.FORTITUDE = (int)info.GetValue ("fortitude", typeof(int));
+			this.REFLEX = (int)info.GetValue ("reflex", typeof(int));
+			this.WILL = (int)info.GetValue ("will", typeof(int));
 
 			this.NAME = (string)info.GetValue("Name", typeof(string));
 			this.AGE = (int)info.GetValue("Age", typeof(int));
@@ -81,11 +81,6 @@ namespace Program
 			this.HAIR = (string)info.GetValue("Hair", typeof(string));
 			this.ge_align = (GE_Align)info.GetValue ("GE_Align", typeof(GE_Align));
 			this.lc_align = (LC_Align)info.GetValue ("LC_Align", typeof(LC_Align));
-
-			//show a character sheet after loading because why not?
-			string sheet = charsheet ();
-			Console.WriteLine (sheet);
-			Console.ReadLine ();
 		}
 
 		//sends data to InOut
@@ -109,12 +104,12 @@ namespace Program
 			info.AddValue ("Class", this.CLASS);
 
 			info.AddValue("Hit Dice", this.HD);
-			info.AddValue("Wealth", this.wealth);
-			info.AddValue("Skillpoints", this.SkillPoints);
+			info.AddValue("Wealth", this.WEALTH);
+			info.AddValue("Skillpoints", this.SKILLPOINTS);
 			info.AddValue("BAB", this.BAB);
-			info.AddValue("fortitude", this.fortitude);
-			info.AddValue("reflex", this.reflex);
-			info.AddValue("will", this.will);
+			info.AddValue("fortitude", this.FORTITUDE);
+			info.AddValue("reflex", this.REFLEX);
+			info.AddValue("will", this.WILL);
 
 			info.AddValue ("Name", this.NAME);
 			info.AddValue ("Age", this.AGE);
@@ -417,150 +412,211 @@ namespace Program
 		public CharacterClass CLASS;
 
 		// Initialize class variables
-		string warn = "";
-		int HD;
-		float wealth;
-		int SkillPoints;
-		int BAB;
-		int fortitude;
-		int reflex;
-		int will;
+		private int HD;
+		private float WEALTH;
+		private int SKILLPOINTS;
+		private int BAB;
+		private int FORTITUDE;
+		private int REFLEX;
+		private int WILL;
+
+		public int hitdice
+		{
+			get
+			{
+				return this.HD;
+			}
+		}
+		public float wealth
+		{
+			get
+			{
+				return this.WEALTH;
+			}
+			set
+			{
+				this.WEALTH = value;
+			}
+		}
+		public int skillpoints
+		{
+			get
+			{
+				return this.SKILLPOINTS;
+			}
+		}
+		public int bab
+		{
+			get
+			{
+				return this.BAB;
+			}
+		}
+		public int fortitude
+		{
+			get
+			{
+				return this.FORTITUDE;
+			}
+		}
+		public int reflex
+		{
+			get
+			{
+				return this.REFLEX;
+			}
+		}
+		public int will
+		{
+			get
+			{
+				return this.WILL;
+			}
+		}
 
 		public void Barbarian(Character character)
 		{
+			character.CLASS = CharacterClass.Barbarian;
 			if (character.lc_align == LC_Align.Lawful)
 			{
-				warn = "Barbarians can't be lawful! Setting alignment to neutral.";
 				character.lc_align = LC_Align.Neutral;
 			}
 			HD = 12;
 			wealth = 105F;
-			SkillPoints = 4 + character.intMod;
+			SKILLPOINTS = 4 + character.intMod;
 			BAB = 1;
-			fortitude = 2;
-			reflex = 0;
-			will = 0;
+			FORTITUDE = 2;
+			REFLEX = 0;
+			WILL = 0;
 		}
 
 		public void Bard(Character character)
 		{
+			character.CLASS = CharacterClass.Bard;
 			HD = 8;
 			wealth = 105F;
-			SkillPoints = 6 + character.intMod;
+			SKILLPOINTS = 6 + character.intMod;
 			BAB = 0;
-			fortitude = 0;
-			reflex = 2;
-			will = 2;
+			FORTITUDE = 0;
+			REFLEX = 2;
+			WILL = 2;
 		}
 
 		public void Cleric(Character character)
 		{
+			character.CLASS = CharacterClass.Cleric;
 			HD = 8;
 			wealth = 140F;
-			SkillPoints = 2 + character.intMod;
+			SKILLPOINTS = 2 + character.intMod;
 			BAB = 0;
-			fortitude = 2;
-			reflex = 0;
-			will = 2;
+			FORTITUDE = 2;
+			REFLEX = 0;
+			WILL = 2;
 		}
 
 		public void Druid(Character character)
 		{
+			character.CLASS = CharacterClass.Druid;
 			HD = 8;
 			wealth = 70F;
-			SkillPoints = 4 + character.intMod;
+			SKILLPOINTS = 4 + character.intMod;
 			BAB = 0;
-			fortitude = 2;
-			reflex = 0;
-			will = 2;
+			FORTITUDE = 2;
+			REFLEX = 0;
+			WILL = 2;
 		}
 
 		public void Fighter(Character character)
 		{
+			character.CLASS = CharacterClass.Fighter;
 			HD = 10;
 			wealth = 175F;
-			SkillPoints = 2 + character.intMod;
+			SKILLPOINTS = 2 + character.intMod;
 			BAB = 1;
-			fortitude = 2;
-			reflex = 0;
-			will = 0;
+			FORTITUDE = 2;
+			REFLEX = 0;
+			WILL = 0;
 		}
 
 		public void Monk(Character character)
 		{
+			character.CLASS = CharacterClass.Monk;
 			if (character.lc_align != LC_Align.Lawful)
 			{
-				warn = "Monks must be lawful! Setting alignment to lawful.";
 				character.lc_align = LC_Align.Lawful;
 			}
 			HD = 8;
 			wealth = 35F;
-			SkillPoints = 4 + character.intMod;
+			SKILLPOINTS = 4 + character.intMod;
 			BAB = 0;
-			fortitude = 2;
-			reflex = 2;
-			will = 2;
+			FORTITUDE = 2;
+			REFLEX = 2;
+			WILL = 2;
 		}
 
 		public void Paladin(Character character)
 		{
+			character.CLASS = CharacterClass.Paladin;
 			if (character.lc_align != LC_Align.Lawful || character.ge_align != GE_Align.Good)
 			{
-				warn = "Paladins must be lawful Good! Setting alignment to lawful Good.";
 				character.lc_align = LC_Align.Lawful;
 				character.ge_align = GE_Align.Good;
 			}
 			HD = 10;
 			wealth = 175F;
-			SkillPoints = 2 + character.intMod;
+			SKILLPOINTS = 2 + character.intMod;
 			BAB = 1;
-			fortitude = 2;
-			reflex = 0;
-			will = 2;
+			FORTITUDE = 2;
+			REFLEX = 0;
+			WILL = 2;
 		}
 
 		public void Ranger(Character character)
 		{
+			character.CLASS = CharacterClass.Ranger;
 			HD = 10;
 			wealth = 175F;
-			SkillPoints = 6 + character.intMod;
+			SKILLPOINTS = 6 + character.intMod;
 			BAB = 1;
-			fortitude = 2;
-			reflex = 2;
-			will = 0;
+			FORTITUDE = 2;
+			REFLEX = 2;
+			WILL = 0;
 		}
 
 		public void Rogue(Character character)
 		{
+			character.CLASS = CharacterClass.Rogue;
 			HD = 8;
 			wealth = 140F;
-			SkillPoints = 8 + character.intMod;
+			SKILLPOINTS = 8 + character.intMod;
 			BAB = 0;
-			fortitude = 0;
-			reflex = 2;
-			will = 0;
+			FORTITUDE = 0;
+			REFLEX = 2;
+			WILL = 0;
 		}
 
 		public void Sorceror(Character character)
 		{
+			character.CLASS = CharacterClass.Sorcerer;
 			HD = 6;
 			wealth = 70F;
-			SkillPoints = 2 + character.intMod;
+			SKILLPOINTS = 2 + character.intMod;
 			BAB = 0;
-			fortitude = 0;
-			reflex = 0;
-			will = 2;
+			FORTITUDE = 0;
+			REFLEX = 0;
+			WILL = 2;
 		}
 
 		public void Wizard(Character character)
 		{
+			character.CLASS = CharacterClass.Wizard;
 			HD = 6;
 			wealth = 70F;
-			SkillPoints = 2 + character.intMod;
+			SKILLPOINTS = 2 + character.intMod;
 			BAB = 0;
-			fortitude = 0;
-			reflex = 0;
-			will = 2;
+			FORTITUDE = 0;
+			REFLEX = 0;
+			WILL = 2;
 		}
 
 		#endregion
@@ -619,13 +675,6 @@ namespace Program
         }
         // These methods should be eventually removed as they are not needed for the character data. They are more
         // presentation and should be in something like the Editor class.
-
-        public void Class()
-        {
-            Console.Clear();
-            Console.WriteLine("Class");
-            Console.ReadLine();
-        }
 
         public void Skills()
         {
