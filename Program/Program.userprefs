@@ -2,10 +2,10 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Program\Character.cs">
     <Files>
-      <File FileName="Program\Program.cs" Line="41" Column="59" />
-      <File FileName="Program\InOut.cs" Line="54" Column="42" />
-      <File FileName="Program\Editor.cs" Line="14" Column="14" />
-      <File FileName="Program\Character.cs" Line="349" Column="10" />
+      <File FileName="Program\Program.cs" Line="39" Column="25" />
+      <File FileName="Program\InOut.cs" Line="19" Column="46" />
+      <File FileName="Program\Editor.cs" Line="315" Column="41" />
+      <File FileName="Program\Character.cs" Line="20" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
