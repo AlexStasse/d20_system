@@ -236,7 +236,7 @@ namespace Program
 		public static void StatChoice(Character character, CharacterRace race)
         {
 			character.RacialReset ();
-            Console.WriteLine("Choose an Ability Score to increase by 2 points:\n" +
+			Console.WriteLine("Choose an Ability Score to increase by 2 points (Default Strength):\n" +
 				"(S)trength, (D)exterity, (C)onstitution, (I)ntelligence, (W)isdom, Cha(r)isma");
             string select = Console.ReadLine().ToUpper();
             bool statselect = true;
@@ -269,10 +269,10 @@ namespace Program
 					character.race = race;
 					character.RaceStatMod("cha");
                         break;
-                    default:
-						//no choice made, stay in the loop
-                        statselect = true;
-                        break;
+				default:
+					character.race = race;
+					character.RaceStatMod ();
+					break;
                 }
             }
         }
