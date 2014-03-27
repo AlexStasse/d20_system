@@ -240,19 +240,20 @@ namespace Program
 			while (classchange == true)
 			{
 				Console.Clear ();
-				Console.WriteLine ("Choose a Class, currently selected is {0}\n\n" +
-					"1) Barbarian\n" +
-					"2) Bard\n" +
-					"3) Cleric\n" +
-					"4) Druid\n" +
-					"5) Fighter\n" +
-					"6) Monk\n" +
-					"7) Paladin\n" +
-					"8) Ranger\n" +
-					"9) Rogue\n" +
-					"10) Sorceror\n" +
-					"11) Wizard\n" +
-					"B)ack", character.CLASS);
+				Console.WriteLine ("Choose a Class, currently selected is {0}\n\n", character.classname);
+				Console.WriteLine ("Class \t\t| Hit Dice | Wealth | Attack Bonus | Fort | Ref | Will |");
+				Console.WriteLine ("1) Barbarian\t    d12        105        +1          +2     0      0");
+				Console.WriteLine ("2) Bard     \t    d8         105         0           0    +2     +2");
+				Console.WriteLine ("3) Cleric   \t    d8         140         0          +2     0     +2");
+				Console.WriteLine ("4) Druid    \t    d8          70         0          +2     0     +2");
+				Console.WriteLine ("5) Fighter  \t    d10        175        +1          +2     0      0");
+				Console.WriteLine ("6) Monk     \t    d8          35         0          +2    +2     +2");
+				Console.WriteLine ("7) Paladin  \t    d10        175        +1          +2     0     +2");
+				Console.WriteLine ("8) Ranger   \t    d10        175        +1          +2    +2      0");
+				Console.WriteLine ("9) Rogue    \t    d8         140         0           0    +2      0");
+				Console.WriteLine ("10) Sorceror\t    d6          70         0           0     0     +2");
+				Console.WriteLine ("11) Wizard  \t    d6          70         0           0     0     +2");
+				Console.WriteLine ("B)ack");
 
 				//choose a race, for halfelf, halforc and human we get to choose a stat up
 				switch (Console.ReadLine ().ToUpper ())

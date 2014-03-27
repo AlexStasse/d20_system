@@ -166,10 +166,11 @@ namespace Program
 					align = string.Format ("Alignment: {0} {1}", lc, ge);
 				}
 
-				string description = string.Format ("Name: {0}, {6} {7}" +
-					"\nAge: {1} years, Height: {2}cm, Weight: {3}kg\n" +
-				                    "Eyes: {4}, Hair: {5}",
-					                    this.name, this.age, this.height, this.weight, 
+				string description = string.Format (
+					"Name: {0}, {6} {7}\n" +
+					"Age: {1} years, Height: {2}cm, Weight: {3}kg\n" +
+				    "Eyes: {4}, Hair: {5}",
+					this.name, this.age, this.height, this.weight, 
 					this.eyes, this.hair, align, this.classname);
 
 				return description;
@@ -189,10 +190,13 @@ namespace Program
 				this.strength, this.dexterity, this.constitution, this.intelligence, this.wisdom, this.charisma,
 				this.strMod, this.dexMod, this.conMod, this.intMod, this.wisMod, this.chaMod);
 
-			string saves = string.Format ("FORTITUDE {0}\t" +
-			               "REFLEX {1}\t" +
-			               "WILL {2}",
-				               this.fortitude, this.reflex, this.will);
+			string saves = string.Format (
+				"BAB {0}\t" +
+				"FORTITUDE {1}\t" +
+				"REFLEX {2}\t" +
+				"WILL {3}\n" +
+				"HITPOINTS {4}",
+				this.bab, this.fortitude, this.reflex, this.will, this.hitdice);
 				
 				string sheet = description + "\n" + attributes + "\n" + saves;
 
