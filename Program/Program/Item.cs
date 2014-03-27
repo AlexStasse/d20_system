@@ -7,6 +7,11 @@ namespace Program
 		public Item()
 		{
 		}
+
+		public char print()
+		{
+			return '.';
+		}
 	}
 }
 
