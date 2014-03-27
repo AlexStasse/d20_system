@@ -212,23 +212,66 @@ namespace Program
                         character.RaceStatMod();
                         break;
                     case "4":
-                        character.race = CharacterRace.HalfElf;
-                        StatChoice(character);
+						StatChoice(character, CharacterRace.HalfElf);
                         break;
                     case "5":
                         character.race = CharacterRace.Halfling;
                         character.RaceStatMod();
                         break;
                     case "6":
-                        character.race = CharacterRace.HalfOrc;
-                        StatChoice(character);
+						StatChoice(character, CharacterRace.HalfOrc);
                         break;
                     case "7":
-                        character.race = CharacterRace.Human;
-                        StatChoice(character);
+						StatChoice(character, CharacterRace.Human);
                         break;
                     case "B":
+						Editor.editormessage = character.charsheet();
                         racechange = false;
+                        break;
+                }
+            }
+        }
+			
+		//this is where we choose a stat up!
+		public static void StatChoice(Character character, CharacterRace race)
+        {
+			character.RacialReset ();
+            Console.WriteLine("Choose an Ability Score to increase by 2 points:\n" +
+				"(S)trength, (D)exterity, (C)onstitution, (I)ntelligence, (W)isdom, Cha(r)isma");
+            string select = Console.ReadLine().ToUpper();
+            bool statselect = true;
+            while(statselect == true)
+            {
+                statselect = false;
+                switch(select)
+                {
+				case "S":
+					character.race = race;
+					character.RaceStatMod("str");
+                        break;
+                    case "D":
+					character.race = race;
+					character.RaceStatMod("dex");
+                        break;
+                    case "C":
+					character.race = race;
+					character.RaceStatMod("con");
+                        break;
+                    case "I":
+					character.race = race;
+					character.RaceStatMod("int");
+                        break;
+                    case "W":
+					character.race = race;
+					character.RaceStatMod("wis");
+                        break;
+                    case "R":
+					character.race = race;
+					character.RaceStatMod("cha");
+                        break;
+                    default:
+						//no choice made, stay in the loop
+                        statselect = true;
                         break;
                 }
             }
@@ -239,6 +282,7 @@ namespace Program
 			bool classchange = true;
 			while (classchange == true)
 			{
+				//this is a huge block to make it easier to read and edit
 				Console.Clear ();
 				Console.WriteLine ("Choose a Class, currently selected is {0}\n\n", character.classname);
 				Console.WriteLine ("Class \t\t| Hit Dice | Wealth | Attack Bonus | Fort | Ref | Will |");
@@ -255,7 +299,7 @@ namespace Program
 				Console.WriteLine ("11) Wizard  \t    d6          70         0           0     0     +2");
 				Console.WriteLine ("B)ack");
 
-				//choose a race, for halfelf, halforc and human we get to choose a stat up
+				//choose a class, some classes force alignments
 				switch (Console.ReadLine ().ToUpper ())
 				{
 				case "1":
@@ -346,45 +390,6 @@ namespace Program
 				}
 			}
 		}
-
-		//this is where we choose a stat up!
-        public static void StatChoice(Character character)
-        {
-			character.RacialReset ();
-            Console.WriteLine("Choose an Ability Score to increase by 2 points:\n" +
-				"(S)trength, (D)exterity, (C)onstitution, (I)ntelligence, (W)isdom, Cha(r)isma");
-            string select = Console.ReadLine().ToUpper();
-            bool statselect = true;
-            while(statselect == true)
-            {
-                statselect = false;
-                switch(select)
-                {
-                    case "S":
-                        character.strRacial = 2;
-                        break;
-                    case "D":
-                        character.dexRacial = 2;
-                        break;
-                    case "C":
-                        character.conRacial = 2;
-                        break;
-                    case "I":
-                        character.intRacial = 2;
-                        break;
-                    case "W":
-                        character.wisRacial = 2;
-                        break;
-                    case "R":
-                        character.chaRacial = 2;
-                        break;
-                    default:
-						//no choice made, stay in the loop
-                        statselect = true;
-                        break;
-                }
-            }
-        }
 
 		public static int DescriptorChoice(string descriptor_string, string units)
 		{

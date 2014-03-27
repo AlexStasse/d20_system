@@ -19,9 +19,8 @@ namespace Program
         HalfElf,
         Halfling,
         HalfOrc,
-        Human}
-
-    ;
+        Human
+	};
 
 	public enum CharacterClass
 	{
@@ -35,9 +34,18 @@ namespace Program
 		Ranger,
 		Rogue,
 		Sorceror,
-		Wizard}
+		Wizard
+	};
 
-	;
+	public enum Ability
+	{
+		strength,
+		dexterity,
+		constitution,
+		intelligence,
+		wisdom,
+		charisma
+	};
 
 	#region InOut
 	//serializable so we can save to a file
@@ -365,12 +373,12 @@ namespace Program
         public CharacterRace race;
 
 		// Racial stat changes
-		public int strRacial;
-		public int dexRacial;
-		public int conRacial;
-		public int intRacial;
-		public int wisRacial;
-		public int chaRacial;
+		private int strRacial;
+		private int dexRacial;
+		private int conRacial;
+		private int intRacial;
+		private int wisRacial;
+		private int chaRacial;
 
 		//reset the racial stat boosts here
 		public void RacialReset()
@@ -383,7 +391,7 @@ namespace Program
 			chaRacial = 0;
 		}
 
-        public void RaceStatMod()
+		public void RaceStatMod(string stat = "str")
         {
             switch(race)
             {
@@ -393,26 +401,52 @@ namespace Program
                     wisRacial = 2;
 					chaRacial = -2;
                     break;
-                case CharacterRace.Elf:
+            case CharacterRace.Elf:
 					RacialReset ();
 					dexRacial = 2;
 					conRacial = -2;
 					intRacial = 2;
                     break;
-                case CharacterRace.Gnome:
+            case CharacterRace.Gnome:
 					RacialReset ();
 					strRacial = -2;
 					conRacial = 2;
 					chaRacial = 2;
                     break;
-                case CharacterRace.Halfling:
+            case CharacterRace.Halfling:
 					RacialReset ();
 					strRacial = -2;
 					dexRacial = 2;
 					chaRacial = 2;
                     break;
-                default:
-                    break;
+			case CharacterRace.HalfElf:
+			case CharacterRace.HalfOrc:
+			case CharacterRace.Human:
+				RacialReset ();
+				switch (stat)
+				{
+				case "str":
+					strRacial = 2;
+					break;
+				case "dex":
+					dexRacial = 2;
+					break;
+				case "con":
+					conRacial = 2;
+					break;
+				case "int":
+					intRacial = 2;
+					break;
+				case "wis":
+					wisRacial = 2;
+					break;
+				case "cha":
+					chaRacial = 2;
+					break;
+				}
+				break;
+            default:
+                break;
             }
         }
 
