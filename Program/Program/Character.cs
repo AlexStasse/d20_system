@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 namespace Program
 {
@@ -23,6 +24,23 @@ namespace Program
 
     ;
 
+	public enum CharacterClass
+	{
+		Barbarian,
+		Bard,
+		Cleric,
+		Druid,
+		Fighter,
+		Monk,
+		Paladin,
+		Ranger,
+		Rogue,
+		Sorcerer,
+		Wizard}
+
+	;
+
+	#region InOut
 	//serializable so we can save to a file
 	[Serializable()]
 	//there is a serializable class we need to inherit to send data in and out
@@ -46,6 +64,15 @@ namespace Program
 			this.chaRacial = (int)info.GetValue("Racial Charisma", typeof(int));
 
 			this.race = (CharacterRace)info.GetValue ("Race", typeof(CharacterRace));
+			this.CLASS = (CharacterClass)info.GetValue ("Class", typeof(CharacterClass));
+
+			this.HD = (int)info.GetValue ("Hit Dice", typeof(int));
+			this.wealth = (float)info.GetValue("Wealth", typeof(float));
+			this.SkillPoints = (int)info.GetValue ("Skillpoints", typeof(int));
+			this.BAB = (int)info.GetValue("BAB", typeof(int));
+			this.fortitude = (int)info.GetValue ("fortitude", typeof(int));
+			this.reflex = (int)info.GetValue ("reflex", typeof(int));
+			this.will = (int)info.GetValue ("will", typeof(int));
 
 			this.NAME = (string)info.GetValue("Name", typeof(string));
 			this.AGE = (int)info.GetValue("Age", typeof(int));
@@ -80,6 +107,15 @@ namespace Program
 			info.AddValue ("Racial Charisma", this.chaRacial);
 
 			info.AddValue ("Race", this.race);
+			info.AddValue ("Class", this.CLASS);
+
+			info.AddValue("Hit Dice", this.HD);
+			info.AddValue("Wealth", this.wealth);
+			info.AddValue("Skillpoints", this.SkillPoints);
+			info.AddValue("BAB", this.BAB);
+			info.AddValue("fortitude", this.fortitude);
+			info.AddValue("reflex", this.reflex);
+			info.AddValue("will", this.will);
 
 			info.AddValue ("Name", this.NAME);
 			info.AddValue ("Age", this.AGE);
@@ -91,6 +127,9 @@ namespace Program
 			info.AddValue ("LC_Align", this.lc_align);
 		}
 
+	#endregion
+
+		#region Charactersheet
 		//creates a character sheet.  By keeping this here it is easier to edit later.
 
 		public string DESCRIPTION;
@@ -157,6 +196,7 @@ namespace Program
 
 			return sheet;
 		}
+		#endregion
 
         #region Character Stats
 
@@ -372,6 +412,160 @@ namespace Program
 
         #endregion
 
+		#region Character Class
+
+		// Define CLASS in capitals since class is a keyword
+		public CharacterClass CLASS;
+
+		// Initialize class variables
+		string warn = "";
+		int HD;
+		float wealth;
+		int SkillPoints;
+		int BAB;
+		int fortitude;
+		int reflex;
+		int will;
+
+		public void Barbarian(Character character)
+		{
+			if (character.lc_align == LC_Align.Lawful)
+			{
+				warn = "Barbarians can't be lawful! Setting alignment to neutral.";
+				character.lc_align = LC_Align.Neutral;
+			}
+			HD = 12;
+			wealth = 105F;
+			SkillPoints = 4 + character.intMod;
+			BAB = 1;
+			fortitude = 2;
+			reflex = 0;
+			will = 0;
+		}
+
+		public void Bard(Character character)
+		{
+			HD = 8;
+			wealth = 105F;
+			SkillPoints = 6 + character.intMod;
+			BAB = 0;
+			fortitude = 0;
+			reflex = 2;
+			will = 2;
+		}
+
+		public void Cleric(Character character)
+		{
+			HD = 8;
+			wealth = 140F;
+			SkillPoints = 2 + character.intMod;
+			BAB = 0;
+			fortitude = 2;
+			reflex = 0;
+			will = 2;
+		}
+
+		public void Druid(Character character)
+		{
+			HD = 8;
+			wealth = 70F;
+			SkillPoints = 4 + character.intMod;
+			BAB = 0;
+			fortitude = 2;
+			reflex = 0;
+			will = 2;
+		}
+
+		public void Fighter(Character character)
+		{
+			HD = 10;
+			wealth = 175F;
+			SkillPoints = 2 + character.intMod;
+			BAB = 1;
+			fortitude = 2;
+			reflex = 0;
+			will = 0;
+		}
+
+		public void Monk(Character character)
+		{
+			if (character.lc_align != LC_Align.Lawful)
+			{
+				warn = "Monks must be lawful! Setting alignment to lawful.";
+				character.lc_align = LC_Align.Lawful;
+			}
+			HD = 8;
+			wealth = 35F;
+			SkillPoints = 4 + character.intMod;
+			BAB = 0;
+			fortitude = 2;
+			reflex = 2;
+			will = 2;
+		}
+
+		public void Paladin(Character character)
+		{
+			if (character.lc_align != LC_Align.Lawful || character.ge_align != GE_Align.Good)
+			{
+				warn = "Paladins must be lawful Good! Setting alignment to lawful Good.";
+				character.lc_align = LC_Align.Lawful;
+				character.ge_align = GE_Align.Good;
+			}
+			HD = 10;
+			wealth = 175F;
+			SkillPoints = 2 + character.intMod;
+			BAB = 1;
+			fortitude = 2;
+			reflex = 0;
+			will = 2;
+		}
+
+		public void Ranger(Character character)
+		{
+			HD = 10;
+			wealth = 175F;
+			SkillPoints = 6 + character.intMod;
+			BAB = 1;
+			fortitude = 2;
+			reflex = 2;
+			will = 0;
+		}
+
+		public void Rogue(Character character)
+		{
+			HD = 8;
+			wealth = 140F;
+			SkillPoints = 8 + character.intMod;
+			BAB = 0;
+			fortitude = 0;
+			reflex = 2;
+			will = 0;
+		}
+
+		public void Sorceror(Character character)
+		{
+			HD = 6;
+			wealth = 70F;
+			SkillPoints = 2 + character.intMod;
+			BAB = 0;
+			fortitude = 0;
+			reflex = 0;
+			will = 2;
+		}
+
+		public void Wizard(Character character)
+		{
+			HD = 6;
+			wealth = 70F;
+			SkillPoints = 2 + character.intMod;
+			BAB = 0;
+			fortitude = 0;
+			reflex = 0;
+			will = 2;
+		}
+
+		#endregion
+
         #region Class Methods
 
         // Class methods.
@@ -406,6 +600,9 @@ namespace Program
             // Default to human.
             this.race = CharacterRace.Human;
 
+			// Default to Rogue
+			this.CLASS = CharacterClass.Rogue;
+
 			// Default Description
 			this.name = "New Character";
 			this.age = 40;
@@ -423,12 +620,6 @@ namespace Program
         }
         // These methods should be eventually removed as they are not needed for the character data. They are more
         // presentation and should be in something like the Editor class.
-        public void Race()
-        {
-            Console.Clear();
-            Console.WriteLine("Race");
-            Console.ReadLine();
-        }
 
         public void Class()
         {

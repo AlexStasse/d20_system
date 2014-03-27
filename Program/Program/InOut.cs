@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+//using System.Runtime.Serialization;
+//using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 namespace Program
 {
@@ -20,29 +21,60 @@ namespace Program
 		}
 
 		//Loads characters from a binary file
+//		public Character Load(string filename)
+//        {
+//			//make sure the directory exists
+//			createdir ();
+//			//create a new Character ckass to load the data into
+//			Character character = new Character();
+//			//stream the data into the character
+//			Stream stream = File.Open(path + filename, FileMode.Open);
+//			BinaryFormatter bFormatter = new BinaryFormatter();
+//			character = (Character)bFormatter.Deserialize(stream);
+//			stream.Close();
+//			return character;
+//        }
+//
+//		public void Save(string filename, Character character)
+//		{
+//			//make sure the directory exists
+//			createdir ();
+//			//stream the character into the save file
+//			Stream stream = File.Open(path + filename, FileMode.Create);
+//			BinaryFormatter bFormatter = new BinaryFormatter();
+//			bFormatter.Serialize(stream, character);
+//			stream.Close();
+//		}
+//
+		//Experimental XML save system, doesn't work yet obviously
 		public Character Load(string filename)
-        {
+		{
 			//make sure the directory exists
 			createdir ();
 			//create a new Character ckass to load the data into
+			System.Xml.Serialization.XmlSerializer reader = 
+				new System.Xml.Serialization.XmlSerializer(typeof(Character));
+			System.IO.StreamReader file = new System.IO.StreamReader(
+				path + filename);
 			Character character = new Character();
-			//stream the data into the character
-			Stream stream = File.Open(path + filename, FileMode.Open);
-			BinaryFormatter bFormatter = new BinaryFormatter();
-			character = (Character)bFormatter.Deserialize(stream);
-			stream.Close();
+			character = (Character)reader.Deserialize(file);
 			return character;
-        }
+		}
+
 		public void Save(string filename, Character character)
 		{
 			//make sure the directory exists
 			createdir ();
 			//stream the character into the save file
-			Stream stream = File.Open(path + filename, FileMode.Create);
-			BinaryFormatter bFormatter = new BinaryFormatter();
-			bFormatter.Serialize(stream, character);
-			stream.Close();
+			System.Xml.Serialization.XmlSerializer writer = 
+				new System.Xml.Serialization.XmlSerializer(typeof(Character));
+
+			System.IO.StreamWriter file = new System.IO.StreamWriter(
+				path + filename);
+			writer.Serialize(file, character);
+			file.Close();
 		}
+
 		//Returns a list of files in the current directory (by default the program directory)
 		public string Files()
 		{
