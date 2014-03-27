@@ -34,7 +34,7 @@ namespace Program
 		Paladin,
 		Ranger,
 		Rogue,
-		Sorcerer,
+		Sorceror,
 		Wizard}
 
 	;
@@ -166,11 +166,11 @@ namespace Program
 					align = string.Format ("Alignment: {0} {1}", lc, ge);
 				}
 
-				string description = string.Format ("Name: {0} " + align +
+				string description = string.Format ("Name: {0}, {6} {7}" +
 					"\nAge: {1} years, Height: {2}cm, Weight: {3}kg\n" +
 				                    "Eyes: {4}, Hair: {5}",
 					                    this.name, this.age, this.height, this.weight, 
-					                    this.eyes, this.hair);
+					this.eyes, this.hair, align, this.classname);
 
 				return description;
 			}
@@ -180,13 +180,21 @@ namespace Program
 		{
 			string description = this.description;
 
-			string attributes = string.Format ("STR: {0} DEX: {1} CON: {2}\n" +
-                "INT: {3} WIS: {4} INT: {5}",
-                 this.strength, this.dexterity, this.constitution, 
-                 this.intelligence, this.wisdom, this.charisma);
-				
+			string attributes = string.Format ("STR: {0} {6}\t" +
+				"DEX: {1} {7}\t" +
+				"CON: {2} {8}\n" +
+				"INT: {3} {9}\t" +
+				"WIS: {4} {10}\t" +
+				"INT: {5} {11}",
+				this.strength, this.dexterity, this.constitution, this.intelligence, this.wisdom, this.charisma,
+				this.strMod, this.dexMod, this.conMod, this.intMod, this.wisMod, this.chaMod);
 
-			string sheet = description + "\n" + attributes;
+			string saves = string.Format ("FORTITUDE {0}\t" +
+			               "REFLEX {1}\t" +
+			               "WILL {2}",
+				               this.fortitude, this.reflex, this.will);
+				
+				string sheet = description + "\n" + attributes + "\n" + saves;
 
 			return sheet;
 		}
@@ -412,6 +420,7 @@ namespace Program
 		public CharacterClass CLASS;
 
 		// Initialize class variables
+		private string CLASSNAME;
 		private int HD;
 		private float WEALTH;
 		private int SKILLPOINTS;
@@ -420,6 +429,13 @@ namespace Program
 		private int REFLEX;
 		private int WILL;
 
+		public string classname 
+		{
+			get
+			{
+				return this.CLASSNAME;
+			}
+		}
 		public int hitdice
 		{
 			get
@@ -477,146 +493,157 @@ namespace Program
 		public void Barbarian(Character character)
 		{
 			character.CLASS = CharacterClass.Barbarian;
+			CLASSNAME = "Barbarian";
 			if (character.lc_align == LC_Align.Lawful)
 			{
 				character.lc_align = LC_Align.Neutral;
 			}
 			HD = 12;
-			wealth = 105F;
+			this.wealth = 105F;
 			SKILLPOINTS = 4 + character.intMod;
 			BAB = 1;
-			FORTITUDE = 2;
-			REFLEX = 0;
-			WILL = 0;
+			FORTITUDE = 2 + this.conMod;
+			REFLEX = 0 + this.dexMod;
+			WILL = 0 + this.wisMod;
 		}
 
 		public void Bard(Character character)
 		{
 			character.CLASS = CharacterClass.Bard;
+			CLASSNAME = "Bard";
 			HD = 8;
-			wealth = 105F;
+			this.wealth = 105F;
 			SKILLPOINTS = 6 + character.intMod;
 			BAB = 0;
-			FORTITUDE = 0;
-			REFLEX = 2;
-			WILL = 2;
+			FORTITUDE = 0 + this.conMod;
+			REFLEX = 2 + this.dexMod;
+			WILL = 2 + this.wisMod;
 		}
 
 		public void Cleric(Character character)
 		{
 			character.CLASS = CharacterClass.Cleric;
+			CLASSNAME = "Cleric";
 			HD = 8;
-			wealth = 140F;
+			this.wealth = 140F;
 			SKILLPOINTS = 2 + character.intMod;
 			BAB = 0;
-			FORTITUDE = 2;
-			REFLEX = 0;
-			WILL = 2;
+			FORTITUDE = 2 + this.conMod;
+			REFLEX = 0 + this.dexMod;
+			WILL = 2 + this.wisMod;
 		}
 
 		public void Druid(Character character)
 		{
 			character.CLASS = CharacterClass.Druid;
+			CLASSNAME = "Druid";
 			HD = 8;
-			wealth = 70F;
+			this.wealth = 70F;
 			SKILLPOINTS = 4 + character.intMod;
 			BAB = 0;
-			FORTITUDE = 2;
-			REFLEX = 0;
-			WILL = 2;
+			FORTITUDE = 2 + this.conMod;
+			REFLEX = 0 + this.dexMod;
+			WILL = 2 + this.wisMod;
 		}
 
 		public void Fighter(Character character)
 		{
 			character.CLASS = CharacterClass.Fighter;
+			CLASSNAME = "Fighter";
 			HD = 10;
-			wealth = 175F;
+			this.wealth = 175F;
 			SKILLPOINTS = 2 + character.intMod;
 			BAB = 1;
-			FORTITUDE = 2;
-			REFLEX = 0;
-			WILL = 0;
+			FORTITUDE = 2 + this.conMod;
+			REFLEX = 0 + this.dexMod;
+			WILL = 0 + this.wisMod;
 		}
 
 		public void Monk(Character character)
 		{
 			character.CLASS = CharacterClass.Monk;
+			CLASSNAME = "Monk";
 			if (character.lc_align != LC_Align.Lawful)
 			{
 				character.lc_align = LC_Align.Lawful;
 			}
 			HD = 8;
-			wealth = 35F;
+			this.wealth = 35F;
 			SKILLPOINTS = 4 + character.intMod;
 			BAB = 0;
-			FORTITUDE = 2;
-			REFLEX = 2;
-			WILL = 2;
+			FORTITUDE = 2 + this.conMod;
+			REFLEX = 2 + this.dexMod;
+			WILL = 2 + this.wisMod;
 		}
 
 		public void Paladin(Character character)
 		{
 			character.CLASS = CharacterClass.Paladin;
+			CLASSNAME = "Paladin";
 			if (character.lc_align != LC_Align.Lawful || character.ge_align != GE_Align.Good)
 			{
 				character.lc_align = LC_Align.Lawful;
 				character.ge_align = GE_Align.Good;
 			}
 			HD = 10;
-			wealth = 175F;
+			this.wealth = 175F;
 			SKILLPOINTS = 2 + character.intMod;
 			BAB = 1;
-			FORTITUDE = 2;
-			REFLEX = 0;
-			WILL = 2;
+			FORTITUDE = 2 + this.conMod;
+			REFLEX = 0 + this.dexMod;
+			WILL = 2 + this.wisMod;
 		}
 
 		public void Ranger(Character character)
 		{
 			character.CLASS = CharacterClass.Ranger;
+			CLASSNAME = "Ranger";
 			HD = 10;
-			wealth = 175F;
+			this.wealth = 175F;
 			SKILLPOINTS = 6 + character.intMod;
 			BAB = 1;
-			FORTITUDE = 2;
-			REFLEX = 2;
-			WILL = 0;
+			FORTITUDE = 2 + this.conMod;
+			REFLEX = 2 + this.dexMod;
+			WILL = 0 + this.wisMod;
 		}
 
 		public void Rogue(Character character)
 		{
 			character.CLASS = CharacterClass.Rogue;
+			CLASSNAME = "Rogue";
 			HD = 8;
-			wealth = 140F;
+			this.wealth = 140F;
 			SKILLPOINTS = 8 + character.intMod;
 			BAB = 0;
-			FORTITUDE = 0;
-			REFLEX = 2;
-			WILL = 0;
+			FORTITUDE = 0 + this.conMod;
+			REFLEX = 2 + this.dexMod;
+			WILL = 0 + this.wisMod;
 		}
 
 		public void Sorceror(Character character)
 		{
-			character.CLASS = CharacterClass.Sorcerer;
+			character.CLASS = CharacterClass.Sorceror;
+			CLASSNAME = "Sorceror";
 			HD = 6;
-			wealth = 70F;
+			this.wealth = 70F;
 			SKILLPOINTS = 2 + character.intMod;
 			BAB = 0;
-			FORTITUDE = 0;
-			REFLEX = 0;
-			WILL = 2;
+			FORTITUDE = 0 + this.conMod;
+			REFLEX = 0 + this.dexMod;
+			WILL = 2 + this.wisMod;
 		}
 
 		public void Wizard(Character character)
 		{
 			character.CLASS = CharacterClass.Wizard;
+			CLASSNAME = "Wizard";
 			HD = 6;
-			wealth = 70F;
+			this.wealth = 70F;
 			SKILLPOINTS = 2 + character.intMod;
 			BAB = 0;
-			FORTITUDE = 0;
-			REFLEX = 0;
-			WILL = 2;
+			FORTITUDE = 0 + this.conMod;
+			REFLEX = 0 + this.dexMod;
+			WILL = 2 + this.wisMod;
 		}
 
 		#endregion
@@ -656,7 +683,7 @@ namespace Program
             this.race = CharacterRace.Human;
 
 			// Default to Rogue
-			this.CLASS = CharacterClass.Rogue;
+			Rogue (this);
 
 			// Default Description
 			this.name = "New Character";
