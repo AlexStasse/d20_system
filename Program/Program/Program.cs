@@ -60,12 +60,11 @@ namespace Program
 								catch (System.IO.FileNotFoundException)
 								{
 									//If the file doesn't exist you can either try again or go back to main menu.  Will have to make sure nobody saves a file called "b"
-									Console.WriteLine ("File not found! (B)ack to main menu or try again");
+									Console.WriteLine ("File not found! try another or no entry to go back");
 									string response = Console.ReadLine ();
 									switch (response)
 									{
-									case "b":
-									case "B":
+									case "":
 										loading = false;
 										select = true;
 										break;

@@ -95,6 +95,9 @@ namespace Program
 							case "Y":
 								//ironically, save = false really means save = true.  LEAVE THE SAVE LOOP
 								save = false;
+								//append the filetype and save, hooray!
+								filename = filename + ".char";
+								S.Save (filename, character);
 								break;
 							case "N":
 								//let's try a different name then shall we, go back to the save loop
@@ -105,12 +108,16 @@ namespace Program
 								break;
 							}
 						}
+					} 
+					else
+					{
+						//append the filetype and save, hooray!
+						filename = filename + ".char";
+						S.Save (filename, character);
+						save = false;
 					}
 				}
 			}
-			//append the filetype and save, hooray!
-			filename = filename + ".char";
-			S.Save (filename, character);
 		}
         //-------------------------------------------------------------------------------------------------------------------------------------------
 		//calculates a new value for ability scores since doing it seperately for every single one was retarded
@@ -479,6 +486,7 @@ namespace Program
 					}
 					break;
 				case "B":
+					Editor.editormessage = character.charsheet ();
 					describing = false;
 					break;
 				}
