@@ -239,41 +239,36 @@ namespace Program
 			Console.WriteLine("Choose an Ability Score to increase by 2 points (Default Strength):\n" +
 				"(S)trength, (D)exterity, (C)onstitution, (I)ntelligence, (W)isdom, Cha(r)isma");
             string select = Console.ReadLine().ToUpper();
-            bool statselect = true;
-            while(statselect == true)
+            switch(select)
             {
-                statselect = false;
-                switch(select)
-                {
-				case "S":
-					character.race = race;
-					character.RaceStatMod("str");
-                        break;
-                    case "D":
-					character.race = race;
-					character.RaceStatMod("dex");
-                        break;
-                    case "C":
-					character.race = race;
-					character.RaceStatMod("con");
-                        break;
-                    case "I":
-					character.race = race;
-					character.RaceStatMod("int");
-                        break;
-                    case "W":
-					character.race = race;
-					character.RaceStatMod("wis");
-                        break;
-                    case "R":
-					character.race = race;
-					character.RaceStatMod("cha");
-                        break;
-				default:
-					character.race = race;
-					character.RaceStatMod ();
-					break;
-                }
+			case "S":
+				character.race = race;
+				character.RaceStatMod("str");
+                    break;
+                case "D":
+				character.race = race;
+				character.RaceStatMod("dex");
+                    break;
+                case "C":
+				character.race = race;
+				character.RaceStatMod("con");
+                    break;
+                case "I":
+				character.race = race;
+				character.RaceStatMod("int");
+                    break;
+                case "W":
+				character.race = race;
+				character.RaceStatMod("wis");
+                    break;
+                case "R":
+				character.race = race;
+				character.RaceStatMod("cha");
+                    break;
+			default:
+				character.race = race;
+				character.RaceStatMod ();
+				break;
             }
         }
 
