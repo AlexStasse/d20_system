@@ -9,7 +9,7 @@ namespace Program
     class InOut
     {
 		//the I/O directory for saving characters is ProgramDir\characters
-		public string path = Directory.GetCurrentDirectory () + "\\characters\\";
+		public string path = Path.Combine(Directory.GetCurrentDirectory (),"characters") + Path.DirectorySeparatorChar;
 
 		//creates the characters directory
 		public void createdir()
@@ -39,6 +39,7 @@ namespace Program
 			//make sure the directory exists
 			createdir ();
 			//stream the character into the save file
+			filename = filename.ToLower();
 			Stream stream = File.Open(path + filename, FileMode.Create);
 			BinaryFormatter bFormatter = new BinaryFormatter();
 			bFormatter.Serialize(stream, character);
